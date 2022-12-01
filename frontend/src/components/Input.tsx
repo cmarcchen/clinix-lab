@@ -1,5 +1,17 @@
 import React from "react";
-export function Input({ handleChange, placeholder, name, value }) {
+
+interface InputProps {
+  handleChange: any;
+  placeholder: string;
+  name: string;
+  value: string;
+}
+export const Input: React.FC<InputProps> = ({
+  handleChange,
+  placeholder,
+  name,
+  value,
+}) => {
   return (
     <label className="mr-2">
       {placeholder}
@@ -13,4 +25,4 @@ export function Input({ handleChange, placeholder, name, value }) {
       />
     </label>
   );
-}
+};
