@@ -1,7 +1,7 @@
-import { TextArea } from "./../components/TextArea";
-import { Input } from "./../components/Input";
+import { TextArea } from "../components/TextArea";
+import { Input } from "../components/Input";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export function NewTrial() {
   const navigate = useNavigate();
@@ -11,13 +11,13 @@ export function NewTrial() {
     longDescription: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     navigate("/trials");
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTrial({ ...trial, [e.target.name]: e.target.value });
   };
 
