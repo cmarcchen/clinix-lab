@@ -1,18 +1,18 @@
 import React from "react";
 
 interface TableCardProps {
-  short_description: string;
-  long_description: string;
+  shortDescription: string;
+  longDescription: string;
 }
 
 export const TableCard: React.FC<TableCardProps> = ({
-  short_description,
-  long_description,
+  shortDescription,
+  longDescription,
 }) => {
   return (
     <div className="flex border gap-2 flex-col">
-      <h2 className="font-bold">{short_description}</h2>
-      <p>{long_description}</p>
+      <h2 className="font-bold">{shortDescription}</h2>
+      <p>{longDescription}</p>
     </div>
   );
 };

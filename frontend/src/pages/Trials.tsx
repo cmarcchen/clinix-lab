@@ -11,12 +11,12 @@ export function Trials() {
         <Button>New</Button>
       </Link>
 
-      {trials.map((trial) => {
+      {trials.map(({ id, longDescription, shortDescription }) => {
         return (
           <TableCard
-            key={trial.id}
-            long_description={trial.long_description}
-            short_description={trial.short_description}
+            key={id}
+            longDescription={longDescription}
+            shortDescription={shortDescription}
           />
         );
       })}
