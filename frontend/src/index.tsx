@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Trials } from "./pages/Trials";
 import { NewTrial } from "./pages/NewTrial";
+import { Patients } from "./pages/Patients";
+import { NewPatient } from "./pages/NewPatient";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "trials/new",
         element: <NewTrial />,
+      },
+      {
+        path: "patients",
+        element: <Patients />,
+      },
+      {
+        path: "patients/new",
+        element: <NewPatient />,
       },
     ],
   },
