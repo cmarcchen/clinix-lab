@@ -12,7 +12,7 @@ export function Trials() {
 
       {trials.map((trial) => {
         return (
-          <div className="flex border gap-2 flex-col">
+          <div key={trial.id} className="flex border gap-2 flex-col">
             <h2 className="font-bold">{trial.short_description}</h2>
             <p>{trial.long_description}</p>
           </div>
