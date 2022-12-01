@@ -3,15 +3,27 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App";
+import { Trials } from "./pages/Trials";
+import { NewTrial } from "./pages/NewTrial";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "/test",
-    element: <h1>Test</h1>,
+    children: [
+      {
+        path: "test",
+        element: <h1>Test</h1>,
+      },
+      {
+        path: "trials",
+        element: <Trials />,
+      },
+      {
+        path: "trials/new",
+        element: <NewTrial />,
+      },
+    ],
   },
 ]);
 
