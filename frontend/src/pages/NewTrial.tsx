@@ -1,3 +1,4 @@
+import { Submit } from "./../components/Submit";
 import { TextArea } from "../components/TextArea";
 import { Input } from "../components/Input";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +38,7 @@ export function NewTrial() {
           handleChange={handleChange}
         />
 
-        <input className="border bg-blue-700" type="submit" value="Submit" />
+        <Submit />
       </form>
     </div>
   );
