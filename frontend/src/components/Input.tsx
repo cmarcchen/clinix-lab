@@ -1,28 +1,11 @@
 import React from "react";
+import TextField from "@mui/material/TextField";
 
 interface InputProps {
   handleChange: any;
-  placeholder: string;
   name: string;
   value: string;
 }
-export const Input: React.FC<InputProps> = ({
-  handleChange,
-  placeholder,
-  name,
-  value,
-}) => {
-  return (
-    <label className="mr-2">
-      {placeholder}
-      <input
-        className="border"
-        type="text"
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={handleChange}
-      />
-    </label>
-  );
+export const Input: React.FC<InputProps> = ({ handleChange, name, value }) => {
+  return <TextField label={name} value={value} onChange={handleChange} />;
 };

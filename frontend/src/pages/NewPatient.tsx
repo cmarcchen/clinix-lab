@@ -1,10 +1,8 @@
-import { Submit } from "./../components/Submit";
-
-import { Input } from "../components/Input";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
-import { addPatient, Patient } from "../data/patients";
+import { addPatient, Patient, Sex } from "../data/patients";
+import { Button, Stack, MenuItem, TextField } from "@mui/material";
 
 export function NewPatient() {
   const navigate = useNavigate();
@@ -29,21 +27,41 @@ export function NewPatient() {
 
   return (
     <div>
-      <form className="flex flex-col" onSubmit={handleSubmit}>
-        <Input
-          placeholder="First Name"
-          name="firstName"
-          value={patient.firstName}
-          handleChange={handleChange}
-        />
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={3} sx={{ minWidth: 300 }}>
+          <TextField
+            required
+            id="firstName"
+            name="firstName"
+            label="First Name"
+            value={patient.firstName}
+            onChange={handleChange}
+          />
+          <TextField
+            required
+            id="lastName"
+            name="lastName"
+            label="Last Name"
+            value={patient.lastName}
+            onChange={handleChange}
+          />
+          <TextField
+            select
+            required
+            id="sex"
+            name="sex"
+            label="Sex"
+            value={patient.sex}
+            onChange={handleChange}
+          >
+            <MenuItem value={Sex.female}>{Sex.female}</MenuItem>
+            <MenuItem value={Sex.male}>{Sex.male}</MenuItem>
+          </TextField>
 
-        <Input
-          placeholder="Last Name"
-          name="lastName"
-          value={patient.lastName}
-          handleChange={handleChange}
-        />
-        <Submit />
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
+        </Stack>
       </form>
     </div>
   );

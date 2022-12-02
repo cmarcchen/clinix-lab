@@ -8,6 +8,7 @@ import { Trials } from "./pages/Trials";
 import { NewTrial } from "./pages/NewTrial";
 import { Patients } from "./pages/Patients";
 import { NewPatient } from "./pages/NewPatient";
+import TestPage from "./pages/Test";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "test",
-        element: <h1>Test</h1>,
+        element: <TestPage />,
       },
       {
         path: "trials",

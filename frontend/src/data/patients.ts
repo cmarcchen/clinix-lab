@@ -1,6 +1,6 @@
 export enum Sex {
-  male,
-  female,
+  male = "male",
+  female = "female",
 }
 
 export interface Patient {
@@ -18,13 +18,13 @@ export const patients: Patient[] = [
     sex: Sex.male,
   },
   {
-    id: "1",
+    id: "2",
     firstName: "John",
     lastName: "Bell",
     sex: Sex.female,
   },
   {
-    id: "1",
+    id: "3",
     firstName: "Victor",
     lastName: "Kasparov",
     sex: Sex.female,

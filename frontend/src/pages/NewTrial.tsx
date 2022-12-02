@@ -33,7 +33,6 @@ export function NewTrial() {
     <div>
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <Input
-          placeholder="Short Description"
           name="shortDescription"
           value={trial.shortDescription}
           handleChange={handleChange}
@@ -45,13 +44,11 @@ export function NewTrial() {
           handleChange={handleChange}
         />
         <Input
-          placeholder="Product"
           name="product"
           value={trial.product}
           handleChange={handleChange}
         />
         <Input
-          placeholder="Formulation"
           name="formulation"
           value={trial.formulation}
           handleChange={handleChange}
