@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { addPatient, Patient, Sex } from "../data/patients";
 import { Button, Stack, MenuItem, TextField } from "@mui/material";
 
-export function NewPatient() {
+export function NewPatientPage() {
   const navigate = useNavigate();
 
   const [patient, setPatient] = useState<Patient>({

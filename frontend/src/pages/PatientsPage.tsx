@@ -1,9 +1,9 @@
-import { TableCard } from "./../components/TableCard";
+import { TableCard } from "../components/TableCard";
 import Button from "@mui/material/Button";
 import { patients } from "../data/patients";
 import { Link } from "react-router-dom";
 
-export function Patients() {
+export function PatientsPage() {
   return (
     <div className="m-2">
       <h1>Patients</h1>

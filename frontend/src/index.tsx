@@ -4,11 +4,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Trials } from "./pages/Trials";
-import { NewTrial } from "./pages/NewTrial";
-import { Patients } from "./pages/Patients";
-import { NewPatient } from "./pages/NewPatient";
-import TestPage from "./pages/Test";
+import { TrialsPage } from "./pages/TrialsPage";
+import { NewTrialPage } from "./pages/NewTrialPage";
+import { PatientsPage } from "./pages/PatientsPage";
+import { NewPatientPage } from "./pages/NewPatientPage";
+import TestPage from "./pages/TestPage";
 
 const router = createBrowserRouter([
   {
@@ -21,19 +21,19 @@ const router = createBrowserRouter([
       },
       {
         path: "trials",
-        element: <Trials />,
+        element: <TrialsPage />,
       },
       {
         path: "trials/new",
-        element: <NewTrial />,
+        element: <NewTrialPage />,
       },
       {
         path: "patients",
-        element: <Patients />,
+        element: <PatientsPage />,
       },
       {
         path: "patients/new",
-        element: <NewPatient />,
+        element: <NewPatientPage />,
       },
     ],
   },
