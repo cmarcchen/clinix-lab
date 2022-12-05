@@ -6,7 +6,7 @@ interface patientEvent {
   eventType: string;
 }
 
-export const patientEvents: patientEvent[] = [
+export let patientEvents: patientEvent[] = [
   {
     id: "a",
     patientId: "1",
@@ -17,5 +17,5 @@ export const patientEvents: patientEvent[] = [
 ];
 
 export const addPatientData = (patientEvent: patientEvent): void => {
-  patientEvents.push(patientEvent);
+  patientEvents = [...patientEvents, patientEvent];
 };
