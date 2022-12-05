@@ -15,28 +15,36 @@ const bull = (
   </Box>
 );
 
-export default function TestPage() {
+interface TrialCardProps {
+  id: string;
+  title: string;
+  description: string;
+  product: string;
+}
+
+export const TrialCard: React.FC<TrialCardProps> = ({
+  id,
+  title,
+  description,
+  product,
+}) => {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
+          Trial
         </Typography>
         <Typography variant="h5" component="div">
-          be{bull}nev{bull}o{bull}lent
+          {title}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
+          {id}
         </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
+        <Typography variant="body2">{description}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small">Edit Trial</Button>
       </CardActions>
     </Card>
   );
-}
+};

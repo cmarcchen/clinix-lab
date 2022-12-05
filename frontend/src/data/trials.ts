@@ -45,7 +45,7 @@ export const addTrial = (trial: Trial): void => {
   trials = [...trials, trial];
 };
 
-export const getTrials = (): Trial[] => {
+export const getTrials = (): Trial[] | [] => {
   return trials;
 };
 

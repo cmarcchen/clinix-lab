@@ -19,6 +19,16 @@ export function TrialsPage() {
   const [selectionModel, setSelectionModel] =
     React.useState<GridSelectionModel>([]);
 
+  const [disableEdit, setDisableEdit] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    if (selectionModel.length > 0) {
+      setDisableEdit(false);
+    } else {
+      setDisableEdit(true);
+    }
+  }, [selectionModel]);
+
   const getEditLink = () => {
     const link = selectionModel[0] ? `./${selectionModel[0]}` : ".";
     console.log(link);
@@ -32,7 +42,9 @@ export function TrialsPage() {
           <Button variant="contained">New</Button>
         </Link>
         <Link to={getEditLink()}>
-          <Button variant="contained">Edit</Button>
+          <Button disabled={disableEdit} variant="contained">
+            Edit
+          </Button>
         </Link>
       </div>
 
