@@ -6,6 +6,7 @@ export interface Trial {
   formulation: string;
   creationDate: string | Date;
   startDate?: string | Date;
+  patients: string[];
 }
 
 export let trials: Trial[] = [
@@ -18,6 +19,7 @@ export let trials: Trial[] = [
     formulation: "injectable 200mg",
     creationDate: "27-08-10",
     startDate: "28-08-10",
+    patients: ["1"],
   },
   {
     id: "vfqwef",
@@ -28,6 +30,7 @@ export let trials: Trial[] = [
     formulation: "injectable 200mg",
     creationDate: "27-08-10",
     startDate: "28-08-10",
+    patients: [],
   },
   {
     id: "abvqwegcd",
@@ -38,6 +41,7 @@ export let trials: Trial[] = [
     formulation: "injectable 200mg",
     creationDate: "27-08-10",
     startDate: "28-08-10",
+    patients: [],
   },
 ];
 

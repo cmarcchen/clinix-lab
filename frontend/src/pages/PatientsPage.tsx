@@ -2,19 +2,8 @@ import Button from "@mui/material/Button";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getPatients, Patient, Sex } from "../data/patients";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
-  {
-    field: "sex",
-    headerName: "Sex",
-    width: 90,
-  },
-];
+import { getPatients, Patient, patientColumns, Sex } from "../data/patients";
+import { DataGrid } from "@mui/x-data-grid";
 
 export function PatientsPage() {
   const [patients, setPatients] = useState<Patient[]>([
@@ -38,7 +27,7 @@ export function PatientsPage() {
       <div className="h-2/3">
         <DataGrid
           rows={patients}
-          columns={columns}
+          columns={patientColumns}
           pageSize={10}
           rowsPerPageOptions={[10]}
           checkboxSelection

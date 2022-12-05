@@ -1,12 +1,12 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { addTrial } from "../data/trials";
+import { addTrial, Trial } from "../data/trials";
 
 export function NewTrialPage() {
   const navigate = useNavigate();
 
-  const [trial, setTrial] = useState({
+  const [trial, setTrial] = useState<Trial>({
     id: "",
     title: "",
     description: "",
@@ -14,6 +14,7 @@ export function NewTrialPage() {
     formulation: "",
     creationDate: "",
     startDate: "",
+    patients: [],
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
