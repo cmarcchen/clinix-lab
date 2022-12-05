@@ -8,7 +8,7 @@ export interface Trial {
   startDate?: string | Date;
 }
 
-export const trials: Trial[] = [
+export let trials: Trial[] = [
   {
     id: "abcd",
     title: "My trial",
@@ -42,5 +42,9 @@ export const trials: Trial[] = [
 ];
 
 export const addTrial = (trial: Trial): void => {
-  trials.push(trial);
+  trials = [...trials, trial];
+};
+
+export const getTrials = (): Trial[] => {
+  return trials;
 };

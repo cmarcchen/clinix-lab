@@ -1,8 +1,8 @@
+import { Button, Stack, TextField, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 import { addPatient, Patient, Sex } from "../data/patients";
-import { Button, Stack, MenuItem, TextField } from "@mui/material";
 
 export function NewPatientPage() {
   const navigate = useNavigate();
@@ -11,11 +11,12 @@ export function NewPatientPage() {
     id: "",
     firstName: "",
     lastName: "",
-    sex: "",
+    sex: Sex.Default,
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(patient);
     addPatient(patient);
 
     navigate("/patients");
@@ -27,6 +28,7 @@ export function NewPatientPage() {
 
   return (
     <div>
+      <h1>New Trial</h1>
       <form onSubmit={handleSubmit}>
         <Stack spacing={3} sx={{ minWidth: 300 }}>
           <TextField
@@ -54,8 +56,8 @@ export function NewPatientPage() {
             value={patient.sex}
             onChange={handleChange}
           >
-            <MenuItem value={Sex.female}>{Sex.female}</MenuItem>
-            <MenuItem value={Sex.male}>{Sex.male}</MenuItem>
+            <MenuItem value={Sex.Female}>{Sex.Female}</MenuItem>
+            <MenuItem value={Sex.Male}>{Sex.Male}</MenuItem>
           </TextField>
 
           <Button type="submit" variant="contained">
