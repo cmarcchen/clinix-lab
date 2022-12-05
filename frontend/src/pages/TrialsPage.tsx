@@ -1,7 +1,8 @@
+import React from "react";
 import { trials } from "../data/trials";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridSelectionModel } from "@mui/x-data-grid";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -15,12 +16,25 @@ const columns: GridColDef[] = [
 ];
 
 export function TrialsPage() {
+  const [selectionModel, setSelectionModel] =
+    React.useState<GridSelectionModel>([]);
+
+  const getEditLink = () => {
+    const link = selectionModel[0] ? `./${selectionModel[0]}` : ".";
+    console.log(link);
+    return link;
+  };
   return (
     <div className="m-2 w-full">
       <h1>Trials</h1>
-      <Link to="./new">
-        <Button variant="contained">New</Button>
-      </Link>
+      <div className="flex space-x-3">
+        <Link to="./new">
+          <Button variant="contained">New</Button>
+        </Link>
+        <Link to={getEditLink()}>
+          <Button variant="contained">Edit</Button>
+        </Link>
+      </div>
 
       <div className="h-2/3">
         <DataGrid
@@ -29,6 +43,10 @@ export function TrialsPage() {
           pageSize={10}
           rowsPerPageOptions={[10]}
           checkboxSelection
+          onSelectionModelChange={(newSelectionModel) => {
+            setSelectionModel(newSelectionModel);
+          }}
+          selectionModel={selectionModel}
         />
       </div>
     </div>

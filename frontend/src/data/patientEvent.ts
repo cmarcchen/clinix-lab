@@ -4,6 +4,7 @@ interface patientEvent {
   title: string;
   description: string;
   eventType: string;
+  createdBy: string;
 }
 
 export let patientEvents: patientEvent[] = [
@@ -13,6 +14,7 @@ export let patientEvents: patientEvent[] = [
     title: "test",
     description: "test",
     eventType: "Add in trial",
+    createdBy: "Dr. ABCD",
   },
 ];
 

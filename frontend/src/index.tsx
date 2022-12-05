@@ -8,6 +8,7 @@ import { TrialsPage } from "./pages/TrialsPage";
 import { NewTrialPage } from "./pages/NewTrialPage";
 import { PatientsPage } from "./pages/PatientsPage";
 import { NewPatientPage } from "./pages/NewPatientPage";
+import { TrialPage } from "./pages/TrialPage";
 import TestPage from "./pages/TestPage";
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "trials/new",
         element: <NewTrialPage />,
+      },
+      {
+        path: "trials/:id",
+        element: <TrialPage />,
       },
       {
         path: "patients",
