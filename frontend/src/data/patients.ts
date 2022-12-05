@@ -11,6 +11,10 @@ export interface Patient {
   firstName: string;
   lastName: string;
   sex: Sex;
+  email?: string;
+  events?: string;
+  dateOfBirth?: string;
+  age?: number;
 }
 
 export let patients: Patient[] = [
@@ -40,6 +44,11 @@ export const addPatient = (patient: Patient): void => {
 
 export const getPatients = (): Patient[] => {
   return patients;
+};
+
+export const getPatient = (id: string): Patient => {
+  const result = patients.filter((patient) => patient.id === id);
+  return result[0];
 };
 
 export const patientColumns: GridColDef[] = [
