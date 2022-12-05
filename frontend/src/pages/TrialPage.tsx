@@ -4,11 +4,14 @@ import { getTrial } from "../data/trials";
 import { TrialCard } from "../components/TrialCard";
 import { Trial } from "../data/trials";
 import { getPatients, Patient, patientColumns, Sex } from "../data/patients";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridSelectionModel } from "@mui/x-data-grid";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 
 export function TrialPage() {
   const { pathname } = useLocation();
+  const [selectionModel, setSelectionModel] =
+    React.useState<GridSelectionModel>([]);
+
   const [trial, setTrial] = useState<Trial>({
     id: "",
     creationDate: "",
@@ -18,6 +21,7 @@ export function TrialPage() {
     title: "",
     patients: [],
   });
+
   const [patients, setPatients] = useState<Patient[]>([
     {
       firstName: "",
@@ -38,12 +42,36 @@ export function TrialPage() {
   }, [pathname]);
 
   useEffect(() => {
-    setPatients(
-      getPatients().filter((patient) => {
-        return trial.patients.includes(patient.id);
-      })
-    );
+    if (!enableEditPatients) {
+      setPatients(
+        getPatients().filter((patient) => {
+          return trial.patients.includes(patient.id);
+        })
+      );
+    }
+
+    if (enableEditPatients) {
+      setPatients(getPatients());
+    }
+  }, [trial, enableEditPatients]);
+
+  useEffect(() => {
+    setSelectionModel(trial.patients);
   }, [trial]);
+
+  // useEffect(() => {
+  //   if (!enableEditPatients) {
+  //     setTrial({
+  //       ...trial,
+  //       patients: selectionModel.map((id) => id as string),
+  //     });
+  //   }
+  // }, [enableEditPatients]);
+
+  const handleSwitchChange = () => {
+    setEnableEditPatients(!enableEditPatients);
+    setTrial({ ...trial, patients: selectionModel.map((id) => id as string) });
+  };
 
   return (
     <div className="">
@@ -55,7 +83,7 @@ export function TrialPage() {
             control={
               <Switch
                 checked={enableEditPatients}
-                onChange={() => setEnableEditPatients(!enableEditPatients)}
+                onChange={handleSwitchChange}
               />
             }
             label="Edit Patients"
@@ -67,6 +95,10 @@ export function TrialPage() {
           pageSize={10}
           rowsPerPageOptions={[10]}
           checkboxSelection={enableEditPatients}
+          onSelectionModelChange={(newSelectionModel) => {
+            setSelectionModel(newSelectionModel);
+          }}
+          selectionModel={selectionModel}
         />
       </div>
     </div>
