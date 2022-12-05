@@ -48,3 +48,8 @@ export const addTrial = (trial: Trial): void => {
 export const getTrials = (): Trial[] => {
   return trials;
 };
+
+export const getTrial = (id: string): Trial => {
+  const filteredTrials = trials.filter((trial) => trial.id === id);
+  return filteredTrials[0];
+};
