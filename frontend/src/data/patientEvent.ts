@@ -1,4 +1,4 @@
-interface patientEvent {
+export interface PatientEvent {
   id: string;
   title?: string;
   description?: string;
@@ -7,7 +7,7 @@ interface patientEvent {
   createdBy?: string;
 }
 
-export let patientEvents: patientEvent[] = [
+export let patientEvents: PatientEvent[] = [
   {
     id: "a",
     title: "test",
@@ -17,6 +17,17 @@ export let patientEvents: patientEvent[] = [
   },
 ];
 
-export const addPatientData = (patientEvent: patientEvent): void => {
+export const addPatientData = (patientEvent: PatientEvent): void => {
   patientEvents = [...patientEvents, patientEvent];
+};
+
+export const getPatientEvents = (
+  eventList: string[] | undefined
+): PatientEvent[] => {
+  if (eventList === undefined) {
+    return [];
+  }
+  return patientEvents.filter((patientEvent) =>
+    eventList.includes(patientEvent.id)
+  );
 };

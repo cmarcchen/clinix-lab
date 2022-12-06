@@ -1,36 +1,33 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { addTrial, Trial } from "../data/trials";
 
-export function NewTrialPage() {
+import { PatientEvent } from "../data/patientEvent";
+
+export function NewEventPage() {
   const navigate = useNavigate();
 
-  const [trial, setTrial] = useState<Trial>({
+  const [patientEvent, setPatientEvent] = useState<PatientEvent>({
     id: "",
     title: "",
     description: "",
-    product: "",
-    formulation: "",
-    creationDate: "",
-    startDate: "",
-    patients: [],
+    eventType: "",
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addTrial(trial);
+    console.log(patientEvent);
 
-    navigate("./..");
+    navigate("./../..");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTrial({ ...trial, [e.target.name]: e.target.value });
+    setPatientEvent({ ...patientEvent, [e.target.name]: e.target.value });
   };
 
   return (
     <div>
-      <h1>New Trial</h1>
+      <h1>New Event</h1>
       <form onSubmit={handleSubmit}>
         <Stack spacing={3} sx={{ minWidth: 300 }}>
           <TextField
@@ -38,7 +35,7 @@ export function NewTrialPage() {
             id="title"
             name="title"
             label="title"
-            value={trial.title}
+            value={patientEvent.title}
             onChange={handleChange}
           />
           <TextField
@@ -47,15 +44,15 @@ export function NewTrialPage() {
             name="description"
             label="Description"
             rows={4}
-            value={trial.description}
+            value={patientEvent.description}
             onChange={handleChange}
           />
           <TextField
             required
-            id="product"
-            name="product"
-            label="Product"
-            value={trial.product}
+            id="eventType"
+            name="eventType"
+            label="Event Type"
+            value={patientEvent.eventType}
             onChange={handleChange}
           />
 

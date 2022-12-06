@@ -12,7 +12,7 @@ export interface Patient {
   lastName: string;
   sex: Sex;
   email?: string;
-  events?: string;
+  events?: string[];
   dateOfBirth?: string;
   age?: number;
 }
@@ -23,6 +23,7 @@ export let patients: Patient[] = [
     firstName: "Elon",
     lastName: "Musk",
     sex: Sex.Male,
+    events: ["a"],
   },
   {
     id: "2",

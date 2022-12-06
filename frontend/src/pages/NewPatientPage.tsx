@@ -19,7 +19,7 @@ export function NewPatientPage() {
     console.log(patient);
     addPatient(patient);
 
-    navigate("/patients");
+    navigate("./..");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

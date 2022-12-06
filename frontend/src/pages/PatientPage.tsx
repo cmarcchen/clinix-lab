@@ -1,13 +1,15 @@
 import { Button } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import { matchPath, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { matchPath, useLocation, useNavigate } from "react-router-dom";
+import { EventTimeline } from "../components/EventTimeline";
 import { PatientCard } from "../components/PatientCard";
+import { getPatientEvents, PatientEvent } from "../data/patientEvent";
 
 import { getPatient, Patient, Sex } from "../data/patients";
-import TestPage from "./TestPage";
 
 export function PatientPage() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const [patient, setPatient] = useState<Patient>({
     id: "",
@@ -15,6 +17,8 @@ export function PatientPage() {
     lastName: "",
     sex: Sex.Default,
   });
+
+  const [patientEvents, setPatientEvents] = useState<PatientEvent[]>([]);
 
   useEffect(() => {
     const path = "/patients/:id/*";
@@ -25,12 +29,24 @@ export function PatientPage() {
     setPatient(getPatient(id));
   }, [pathname]);
 
+  useEffect(() => {
+    const { events } = patient;
+
+    setPatientEvents(getPatientEvents(events));
+  }, [patient]);
+
+  const handleAddEventClick = () => {
+    navigate("./events/new");
+  };
+
   return (
     <div className="">
       <PatientCard {...patient} />
       <div className="">
-        <Button variant="contained">Add Event</Button>
-        <TestPage />
+        <Button variant="contained" onClick={handleAddEventClick}>
+          Add Event
+        </Button>
+        <EventTimeline events={patientEvents} />
       </div>
     </div>
   );
