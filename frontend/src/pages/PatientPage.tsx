@@ -40,7 +40,7 @@ export function PatientPage() {
   };
 
   return (
-    <div className="">
+    <div className="bg-">
       <PatientCard {...patient} />
       <div className="">
         <Button variant="contained" onClick={handleAddEventClick}>

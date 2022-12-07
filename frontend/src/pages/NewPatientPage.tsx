@@ -16,7 +16,7 @@ export function NewPatientPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(patient);
+
     addPatient(patient);
 
     navigate("./..");

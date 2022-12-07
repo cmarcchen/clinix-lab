@@ -17,7 +17,7 @@ export let patientEvents: PatientEvent[] = [
   },
 ];
 
-export const addPatientData = (patientEvent: PatientEvent): void => {
+export const addPatientEvent = (patientEvent: PatientEvent): void => {
   patientEvents = [...patientEvents, patientEvent];
 };
 
