@@ -8,21 +8,54 @@ export const resolvers = {
     patients: async (_, __, { dataSources }) => {
       return await dataSources.prisma.patient.findMany();
     },
+    patient: async (_, { id }, { dataSources }) => {
+      return await dataSources.prisma.patient.findUnique({
+        where: {
+          id,
+        },
+      });
+    },
     trials: async (_, __, { dataSources }) => {
       return await dataSources.prisma.trial.findMany();
+    },
+    trial: async (_, { id }, { dataSources }) => {
+      return await dataSources.prisma.trial.findUnique({
+        where: {
+          id,
+        },
+      });
     },
     patientEvents: async (_, __, { dataSources }) => {
       return await dataSources.prisma.patientEvent.findMany();
     },
+    patientEvent: async (_, { id }, { dataSources }) => {
+      return await dataSources.prisma.patientEvent.findUnique({
+        where: {
+          id,
+        },
+      });
+    },
   },
   Mutation: {
     createPatient: async (_, __, { dataSources }) => {
-      const { id } = await dataSources.prisma.patient.create({ data: {} });
+      const patient = await dataSources.prisma.patient.create({ data: {} });
       return {
         code: 200,
         success: true,
         message: "Created a new patient",
-        id,
+        patient,
+      };
+    },
+    updatePatient: async (_, { id, data }, { dataSources }) => {
+      const patient = await dataSources.prisma.patient.update({
+        where: { id },
+        data,
+      });
+      return {
+        code: 200,
+        success: true,
+        message: "Patched patient",
+        patient,
       };
     },
   },

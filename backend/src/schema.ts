@@ -1,7 +1,3 @@
-// import { gql } from "@apollo/server";
-
-import { graphql } from "graphql";
-
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.
@@ -11,7 +7,6 @@ export const typeDefs = `#graphql
   scalar DateTime
 
   type Patient {
-    
     id: ID!
     firstName: String
     lastName: String
@@ -21,6 +16,14 @@ export const typeDefs = `#graphql
     age: Int
     trials: [Trial]
     events: [PatientEvent]
+  }
+
+  input PatientInput {
+    firstName: String
+    lastName: String
+    sex: String
+    email: String
+    age: Int
   }
 
   type PatientEvent {
@@ -42,7 +45,6 @@ export const typeDefs = `#graphql
     formulation: String
     createdAt: DateTime!
     patients: [Patient]
-
   }
 
   # The "Query" type is special: it lists all of the available queries that
@@ -52,18 +54,27 @@ export const typeDefs = `#graphql
     patients: [Patient]
     trials: [Trial]
     patientEvents: [PatientEvent]
+    patient(id: ID!): Patient
+    trial(id: ID!): Trial
+    patientEvent(id: ID!): PatientEvent
   }
-
 
   type Mutation {
     createPatient: CreatePatientResponse!
-    # patchPatient(patient: Patient!): PatchPatientResponse!
+    updatePatient(id: ID!, data: PatientInput): UpdatePatientResponse!
   }
 
   type CreatePatientResponse {
     code: Int!
     success: Boolean!
     message: String!
-    id: String
+    patient: Patient
+  }
+
+  type UpdatePatientResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    patient: Patient
   }
 `;
