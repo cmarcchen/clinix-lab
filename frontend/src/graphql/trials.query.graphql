@@ -1,0 +1,53 @@
+query getTrials {
+  trials {
+    id
+    title
+    description
+    product
+    formulation
+    createdAt
+    patients {
+      id
+      firstName
+      lastName
+      createdAt
+      sex
+      email
+      age
+    }
+  }
+}
+query getTrial($trialId: ID!) {
+  trial(id: $trialId) {
+    id
+    title
+    description
+    product
+    formulation
+    createdAt
+    patients {
+      id
+      firstName
+      lastName
+      createdAt
+      sex
+      email
+      age
+    }
+  }
+}
+mutation CreateTrial($data: TrialInput) {
+  createTrial(data: $data) {
+    code
+    success
+    message
+    trial {
+      id
+      title
+      description
+      product
+      formulation
+      createdAt
+    }
+  }
+}

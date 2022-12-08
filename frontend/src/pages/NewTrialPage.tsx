@@ -1,27 +1,30 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { addTrial, Trial } from "../data/trials";
+
+import { useMutation } from "@apollo/client";
+import { CreateTrialDocument, Trial, TrialInput } from "../graphql/generated";
 
 export function NewTrialPage() {
   const navigate = useNavigate();
 
-  const [trial, setTrial] = useState<Trial>({
-    id: "",
-    title: "",
-    description: "",
-    product: "",
-    formulation: "",
-    creationDate: "",
-    startDate: "",
-    patients: [],
-  });
+  const [createTrial, { loading, error, data }] =
+    useMutation(CreateTrialDocument);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [trial, setTrial] = useState<TrialInput>({});
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addTrial(trial);
 
-    navigate("./..");
+    const response = await createTrial({
+      variables: {
+        data: trial,
+      },
+    });
+
+    if (!loading) {
+      navigate("./..");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

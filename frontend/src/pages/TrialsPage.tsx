@@ -1,8 +1,9 @@
 import React from "react";
-import { trials } from "../data/trials";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { DataGrid, GridColDef, GridSelectionModel } from "@mui/x-data-grid";
+import { useQuery } from "@apollo/client";
+import { GetTrialsDocument } from "../graphql/generated";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -16,6 +17,8 @@ const columns: GridColDef[] = [
 ];
 
 export function TrialsPage() {
+  const { loading, error, data } = useQuery(GetTrialsDocument);
+
   const [selectionModel, setSelectionModel] =
     React.useState<GridSelectionModel>([]);
 
@@ -31,7 +34,7 @@ export function TrialsPage() {
 
   const getEditLink = () => {
     const link = selectionModel[0] ? `./${selectionModel[0]}` : ".";
-    console.log(link);
+
     return link;
   };
   return (
@@ -49,17 +52,21 @@ export function TrialsPage() {
       </div>
 
       <div className="h-2/3">
-        <DataGrid
-          rows={trials}
-          columns={columns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-          checkboxSelection
-          onSelectionModelChange={(newSelectionModel) => {
-            setSelectionModel(newSelectionModel);
-          }}
-          selectionModel={selectionModel}
-        />
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <DataGrid
+            rows={data?.trials!}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            checkboxSelection
+            onSelectionModelChange={(newSelectionModel) => {
+              setSelectionModel(newSelectionModel);
+            }}
+            selectionModel={selectionModel}
+          />
+        )}
       </div>
     </div>
   );

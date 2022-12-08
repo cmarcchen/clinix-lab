@@ -5,15 +5,9 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Trial } from "../graphql/generated";
 
-interface TrialCardProps {
-  id: string;
-  title: string;
-  description: string;
-  product: string;
-}
-
-export const TrialCard: React.FC<TrialCardProps> = ({
+export const TrialCard: React.FC<Trial> = ({
   id,
   title,
   description,
