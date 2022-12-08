@@ -15,4 +15,15 @@ export const resolvers = {
       return await dataSources.prisma.patientEvent.findMany();
     },
   },
+  Mutation: {
+    createPatient: async (_, __, { dataSources }) => {
+      const { id } = await dataSources.prisma.patient.create({ data: {} });
+      return {
+        code: 200,
+        success: true,
+        message: "Created a new patient",
+        id,
+      };
+    },
+  },
 };

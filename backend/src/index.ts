@@ -2,12 +2,19 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./schema.js";
 import { resolvers } from "./resolvers.js";
+// import { resolvers } from "./resolvers.js";
 
 import { PrismaClient } from "@prisma/client";
 
+interface ContextValue {
+  dataSources: {
+    prisma: PrismaClient;
+  };
+}
+
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
-const server = new ApolloServer({
+const server = new ApolloServer<ContextValue>({
   typeDefs,
   resolvers,
 });
