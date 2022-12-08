@@ -41,6 +41,17 @@ const mutations = {
             patient,
         };
     },
+    deletePatient: async (_, { id }, { dataSources }) => {
+        const patient = await dataSources.prisma.patient.delete({
+            where: { id },
+        });
+        return {
+            code: 200,
+            success: true,
+            message: "Deleted patient",
+            patient,
+        };
+    },
     assignPatientToTrial: async (_, { patientId, trialId }, { dataSources }) => {
         await dataSources.prisma.trial.update({
             where: {
@@ -49,6 +60,37 @@ const mutations = {
             data: {
                 patients: {
                     connect: {
+                        id: patientId,
+                    },
+                },
+            },
+        });
+        const patient = await dataSources.prisma.patient.findUnique({
+            where: {
+                id: patientId,
+            },
+        });
+        const trial = await dataSources.prisma.trial.findUnique({
+            where: {
+                id: trialId,
+            },
+        });
+        return {
+            code: 200,
+            success: true,
+            message: "Assign patient to trial",
+            patient,
+            trial,
+        };
+    },
+    unassignPatientToTrial: async (_, { patientId, trialId }, { dataSources }) => {
+        await dataSources.prisma.trial.update({
+            where: {
+                id: trialId,
+            },
+            data: {
+                patients: {
+                    disconnect: {
                         id: patientId,
                     },
                 },

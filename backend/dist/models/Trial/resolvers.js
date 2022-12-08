@@ -39,5 +39,16 @@ const mutations = {
             trial,
         };
     },
+    deleteTrial: async (_, { id }, { dataSources }) => {
+        const trial = await dataSources.prisma.trial.delete({
+            where: { id },
+        });
+        return {
+            code: 200,
+            success: true,
+            message: "Deleted trial",
+            trial,
+        };
+    },
 };
 export const resolvers = { queries, mutations };

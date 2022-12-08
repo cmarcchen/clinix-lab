@@ -7,6 +7,20 @@ export const types = `#graphql
     createdBy: String
     createdAt: DateTime!
     patient: Patient
-    patientId: String
+    patientId: String!
+  }
+
+  input PatientEventInput {
+    title: String
+    description: String
+    type: String
+    createdBy: String
+  }
+
+  type PatientEventResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    patientEvent: PatientEvent
   }
 `;
