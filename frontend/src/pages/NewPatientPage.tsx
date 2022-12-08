@@ -2,24 +2,37 @@ import { Button, Stack, TextField, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
-import { addPatient, Patient, Sex } from "../data/patients";
+import { Sex } from "../data/patients";
+import { useMutation } from "@apollo/client";
+import { CreatePatientDocument } from "../graphql/generated";
+import { PatientInput } from "../graphql/generated";
 
 export function NewPatientPage() {
   const navigate = useNavigate();
 
-  const [patient, setPatient] = useState<Patient>({
-    id: "",
+  const [createPatient, { loading, error, data }] = useMutation(
+    CreatePatientDocument
+  );
+
+  const [patient, setPatient] = useState<PatientInput>({
     firstName: "",
     lastName: "",
     sex: Sex.Default,
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    addPatient(patient);
+    await createPatient({
+      variables: {
+        data: patient,
+      },
+    });
 
-    navigate("./..");
+    if (!loading) {
+      console.log(data);
+      navigate("./..");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

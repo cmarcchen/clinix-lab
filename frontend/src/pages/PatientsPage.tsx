@@ -6,6 +6,7 @@ import { patientColumns } from "../data/patients";
 import { DataGrid, GridSelectionModel } from "@mui/x-data-grid";
 import { useQuery } from "@apollo/client";
 import { GetPatientsDocument } from "../graphql/generated";
+import { CircularProgress } from "@mui/material";
 
 export function PatientsPage() {
   const { loading, error, data } = useQuery(GetPatientsDocument);
@@ -41,18 +42,22 @@ export function PatientsPage() {
           </Button>
         </Link>
       </div>
-      <div className="h-2/3">
-        <DataGrid
-          rows={data?.patients!}
-          columns={patientColumns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-          checkboxSelection
-          onSelectionModelChange={(newSelectionModel) => {
-            setSelectionModel(newSelectionModel);
-          }}
-          selectionModel={selectionModel}
-        />
+      <div className="h-4/5">
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <DataGrid
+            rows={data?.patients!}
+            columns={patientColumns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            checkboxSelection
+            onSelectionModelChange={(newSelectionModel) => {
+              setSelectionModel(newSelectionModel);
+            }}
+            selectionModel={selectionModel}
+          />
+        )}
       </div>
     </div>
   );
