@@ -57,5 +57,26 @@ export const resolvers = {
                 patient,
             };
         },
+        createTrial: async (_, { data }, { dataSources }) => {
+            const trial = await dataSources.prisma.trial.create({ data });
+            return {
+                code: 200,
+                success: true,
+                message: "Created a new trial",
+                trial,
+            };
+        },
+        updateTrial: async (_, { id, data }, { dataSources }) => {
+            const trial = await dataSources.prisma.trial.update({
+                where: { id },
+                data,
+            });
+            return {
+                code: 200,
+                success: true,
+                message: "Patched patient",
+                trial,
+            };
+        },
     },
 };

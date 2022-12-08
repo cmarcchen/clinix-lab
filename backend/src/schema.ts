@@ -47,6 +47,13 @@ export const typeDefs = `#graphql
     patients: [Patient]
   }
 
+  input TrialInput {
+    title: String
+    description: String
+    product: String
+    formulation: String
+  }
+
   # The "Query" type is special: it lists all of the available queries that
   # clients can execute, along with the return type for each. In this
   # case, the "books" query returns an array of zero or more Books (defined above).
@@ -60,21 +67,23 @@ export const typeDefs = `#graphql
   }
 
   type Mutation {
-    createPatient(data: PatientInput): CreatePatientResponse!
-    updatePatient(id: ID!, data: PatientInput): UpdatePatientResponse!
+    createPatient(data: PatientInput): PatientResponse!
+    updatePatient(id: ID!, data: PatientInput): PatientResponse!
+    createTrial(data: TrialInput): TrialResponse!
+    updateTrial(id: ID!, data: TrialInput): TrialResponse!
   }
 
-  type CreatePatientResponse {
+  type PatientResponse {
     code: Int!
     success: Boolean!
     message: String!
     patient: Patient
   }
 
-  type UpdatePatientResponse {
+  type TrialResponse {
     code: Int!
     success: Boolean!
     message: String!
-    patient: Patient
+    trial: Trial
   }
 `;
