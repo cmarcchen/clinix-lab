@@ -1,0 +1,5 @@
+query GetPatients {
+  patients {
+    id
+  }
+}
