@@ -2,18 +2,13 @@ import Button from "@mui/material/Button";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getPatients, Patient, patientColumns, Sex } from "../data/patients";
+import { patientColumns } from "../data/patients";
 import { DataGrid, GridSelectionModel } from "@mui/x-data-grid";
+import { useQuery } from "@apollo/client";
+import { GetPatientsDocument } from "../graphql/generated";
 
 export function PatientsPage() {
-  const [patients, setPatients] = useState<Patient[]>([
-    {
-      firstName: "",
-      lastName: "",
-      id: "",
-      sex: Sex.Default,
-    },
-  ]);
+  const { loading, error, data } = useQuery(GetPatientsDocument);
 
   const [selectionModel, setSelectionModel] = useState<GridSelectionModel>([]);
 
@@ -33,9 +28,6 @@ export function PatientsPage() {
     return link;
   };
 
-  useEffect(() => {
-    setPatients(getPatients());
-  }, []);
   return (
     <div className="m-2 w-full">
       <h1>Patients</h1>
@@ -51,7 +43,7 @@ export function PatientsPage() {
       </div>
       <div className="h-2/3">
         <DataGrid
-          rows={patients}
+          rows={data?.patients!}
           columns={patientColumns}
           pageSize={10}
           rowsPerPageOptions={[10]}

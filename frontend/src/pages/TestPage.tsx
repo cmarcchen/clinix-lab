@@ -1,34 +1,23 @@
 import * as React from "react";
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
+import { useMutation } from "@apollo/client";
+import { CreatePatientDocument } from "../graphql/generated";
+import { Button } from "@mui/material";
 
 export default function TestPage() {
+  const [createPatient, { loading, error, data }] = useMutation(
+    CreatePatientDocument
+  );
+  const handleClick = async () => {
+    await createPatient();
+    if (!loading) {
+      console.log(data?.createPatient.patient?.id);
+    }
+  };
   return (
-    <Timeline>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot />
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>Eat</TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot />
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>Code</TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot />
-        </TimelineSeparator>
-        <TimelineContent>Sleep</TimelineContent>
-      </TimelineItem>
-    </Timeline>
+    <div>
+      <Button variant="contained" onClick={handleClick}>
+        Create Patient
+      </Button>
+    </div>
   );
 }

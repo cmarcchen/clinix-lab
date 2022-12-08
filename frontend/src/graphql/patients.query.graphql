@@ -1,5 +1,20 @@
 query GetPatients {
   patients {
     id
+    firstName
+    lastName
+    age
+    email
+  }
+}
+
+mutation CreatePatient {
+  createPatient {
+    code
+    success
+    message
+    patient {
+      id
+    }
   }
 }
