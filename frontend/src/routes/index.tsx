@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+
 import { TrialsPage } from "../pages/TrialsPage";
 import { NewTrialPage } from "../pages/NewTrialPage";
 import { PatientsPage } from "../pages/PatientsPage";
@@ -7,12 +8,12 @@ import { TrialPage } from "../pages/TrialPage";
 import TestPage from "../pages/TestPage";
 import { PatientPage } from "../pages/PatientPage";
 import { NewEventPage } from "../pages/NewEventPage";
-import App from "../App";
+import Layout from "../layouts/Layout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Layout />,
     children: [
       {
         path: "test",
