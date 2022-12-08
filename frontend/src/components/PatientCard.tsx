@@ -6,15 +6,9 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Sex } from "../data/patients";
+import type { Patient } from "../types";
 
-interface PatientCardProps {
-  id: string;
-  firstName: string;
-  lastName: string;
-  sex: Sex;
-}
-
-export const PatientCard: React.FC<PatientCardProps> = ({
+export const PatientCard: React.FC<Patient> = ({
   id,
   firstName,
   lastName,

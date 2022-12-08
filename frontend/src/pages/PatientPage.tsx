@@ -1,39 +1,24 @@
-import { Button } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client";
+import { Button, CircularProgress } from "@mui/material";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import { EventTimeline } from "../components/EventTimeline";
 import { PatientCard } from "../components/PatientCard";
-import { getPatientEvents, PatientEvent } from "../data/patientEvent";
-
-import { getPatient, Patient, Sex } from "../data/patients";
+import { GetPatientDocument } from "../graphql/generated";
 
 export function PatientPage() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const [patient, setPatient] = useState<Patient>({
-    id: "",
-    firstName: "",
-    lastName: "",
-    sex: Sex.Default,
+  const path = "/patients/:id/*";
+  const match = matchPath(path, pathname);
+
+  const id = match?.params.id!;
+
+  const { loading, error, data } = useQuery(GetPatientDocument, {
+    variables: {
+      patientId: id,
+    },
   });
-
-  const [patientEvents, setPatientEvents] = useState<PatientEvent[]>([]);
-
-  useEffect(() => {
-    const path = "/patients/:id/*";
-    const match = matchPath(path, pathname);
-
-    const id = match?.params.id!;
-
-    setPatient(getPatient(id));
-  }, [pathname]);
-
-  useEffect(() => {
-    const { events } = patient;
-
-    setPatientEvents(getPatientEvents(events));
-  }, [patient]);
 
   const handleAddEventClick = () => {
     navigate("./events/new");
@@ -41,12 +26,12 @@ export function PatientPage() {
 
   return (
     <div className="bg-">
-      <PatientCard {...patient} />
+      {loading ? <CircularProgress /> : <PatientCard {...data!.patient} />}
       <div className="">
         <Button variant="contained" onClick={handleAddEventClick}>
           Add Event
         </Button>
-        <EventTimeline events={patientEvents} />
+        {/* <EventTimeline events={patientEvents} /> */}
       </div>
     </div>
   );

@@ -8,6 +8,18 @@ query GetPatients {
   }
 }
 
+query GetPatient($patientId: ID!) {
+  patient(id: $patientId) {
+    id
+    firstName
+    lastName
+    createdAt
+    sex
+    email
+    age
+  }
+}
+
 mutation CreatePatient($data: PatientInput) {
   createPatient(data: $data) {
     code
