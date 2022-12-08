@@ -24,8 +24,8 @@ model Patient {
 
 model Trial {
   id          String    @id @default(cuid())
-  title       String
-  description String
+  title       String?
+  description String?
   product     String?
   formulation String?
   createdAt   DateTime  @default(now())
@@ -34,8 +34,8 @@ model Trial {
 
 model PatientEvent {
   id          String   @id @default(cuid())
-  title       String
-  description String
+  title       String?
+  description String?
   type        String?
   createdBy   String?
   createdAt   DateTime @default(now())

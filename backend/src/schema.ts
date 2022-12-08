@@ -71,6 +71,7 @@ export const typeDefs = `#graphql
     updatePatient(id: ID!, data: PatientInput): PatientResponse!
     createTrial(data: TrialInput): TrialResponse!
     updateTrial(id: ID!, data: TrialInput): TrialResponse!
+    assignPatientToTrial(patientId: ID!, trialId: ID!): PatientTrialResponse!
   }
 
   type PatientResponse {
@@ -84,6 +85,14 @@ export const typeDefs = `#graphql
     code: Int!
     success: Boolean!
     message: String!
+    trial: Trial
+  }
+
+  type PatientTrialResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    patient: Patient
     trial: Trial
   }
 `;
