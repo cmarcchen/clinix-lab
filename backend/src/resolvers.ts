@@ -37,8 +37,8 @@ export const resolvers = {
     },
   },
   Mutation: {
-    createPatient: async (_, __, { dataSources }) => {
-      const patient = await dataSources.prisma.patient.create({ data: {} });
+    createPatient: async (_, { data }, { dataSources }) => {
+      const patient = await dataSources.prisma.patient.create({ data });
       return {
         code: 200,
         success: true,

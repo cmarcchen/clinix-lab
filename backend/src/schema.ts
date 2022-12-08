@@ -60,7 +60,7 @@ export const typeDefs = `#graphql
   }
 
   type Mutation {
-    createPatient: CreatePatientResponse!
+    createPatient(data: PatientInput): CreatePatientResponse!
     updatePatient(id: ID!, data: PatientInput): UpdatePatientResponse!
   }
 
