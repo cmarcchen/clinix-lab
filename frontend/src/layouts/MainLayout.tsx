@@ -1,24 +1,19 @@
 import { SideBar } from "./SideBar";
 import { Outlet } from "react-router-dom";
 import { MainAppBar } from "./MainAppBar";
-import { Container } from "@mui/system";
+import { Box, Toolbar, Typography, Drawer } from "@mui/material";
 
 export function MainLayout() {
   return (
     <div>
       <MainAppBar />
-      <div className="flex">
-        <SideBar />
-
-        <Container
-          sx={{
-            display: "flex",
-            marginTop: "20px",
-          }}
-        >
+      <SideBar />
+      <Box component="main" sx={{ marginLeft: "240px", flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        <div className="flex justify-center">
           <Outlet />
-        </Container>
-      </div>
+        </div>
+      </Box>
     </div>
   );
 }

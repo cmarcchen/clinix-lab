@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button, CircularProgress, Typography } from "@mui/material";
-import { DataGrid, GridColDef, GridSelectionModel } from "@mui/x-data-grid";
+import { GridColDef, GridSelectionModel } from "@mui/x-data-grid";
 import { useQuery } from "@apollo/client";
 import { GetTrialsDocument } from "../graphql/generated";
+import { TrialCard } from "../components/TrialCard";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -46,7 +47,7 @@ export function TrialsPage() {
       >
         Trials
       </Typography>
-      <div className="flex space-x-3">
+      <div className="flex space-x-3 mb-10">
         <Link to="./new">
           <Button variant="contained">New</Button>
         </Link>
@@ -57,21 +58,13 @@ export function TrialsPage() {
         </Link>
       </div>
 
-      <div className="h-2/3">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {loading ? (
           <CircularProgress />
         ) : (
-          <DataGrid
-            rows={data?.trials!}
-            columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
-            checkboxSelection
-            onSelectionModelChange={(newSelectionModel) => {
-              setSelectionModel(newSelectionModel);
-            }}
-            selectionModel={selectionModel}
-          />
+          data?.trials.map((trial) => {
+            return <TrialCard key={trial!.id} {...trial!} />;
+          })
         )}
       </div>
     </div>

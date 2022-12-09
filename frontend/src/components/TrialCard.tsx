@@ -16,8 +16,13 @@ export const TrialCard: React.FC<Trial> = ({
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Trial
+        <Typography
+          sx={{ fontSize: 14 }}
+          color="text.secondary"
+          gutterBottom
+          component="div"
+        >
+          {product ? product : "null"}
         </Typography>
         <Typography variant="h5" component="div">
           {title}
