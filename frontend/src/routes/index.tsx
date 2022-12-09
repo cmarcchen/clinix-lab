@@ -8,13 +8,23 @@ import { TrialPage } from "../pages/TrialPage";
 import TestPage from "../pages/TestPage";
 import { PatientPage } from "../pages/PatientPage";
 import { NewEventPage } from "../pages/NewEventPage";
-import Layout from "../layouts/Layout";
+import { MainLayout } from "../layouts/MainLayout";
+import { DashboardPage } from "../pages/DashboardPage";
+import { Login } from "../pages/authentication/Login";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <MainLayout />,
     children: [
+      {
+        path: "dashboard",
+        element: <DashboardPage />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
       {
         path: "test",
         element: <TestPage />,

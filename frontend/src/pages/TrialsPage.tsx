@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Typography } from "@mui/material";
 import { DataGrid, GridColDef, GridSelectionModel } from "@mui/x-data-grid";
 import { useQuery } from "@apollo/client";
 import { GetTrialsDocument } from "../graphql/generated";
@@ -38,8 +38,14 @@ export function TrialsPage() {
     return link;
   };
   return (
-    <div className="m-2 w-full">
-      <h1>Trials</h1>
+    <div className="w-full">
+      <Typography
+        sx={{
+          marginBottom: "20px",
+        }}
+      >
+        Trials
+      </Typography>
       <div className="flex space-x-3">
         <Link to="./new">
           <Button variant="contained">New</Button>

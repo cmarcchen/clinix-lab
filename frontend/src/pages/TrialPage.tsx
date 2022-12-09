@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { matchPath, useLocation } from "react-router-dom";
-import { getTrial } from "../data/trials";
 import { TrialCard } from "../components/TrialCard";
-import { Trial } from "../data/trials";
-// import { getPatients, Patient, patientColumns, Sex } from "../data/patients";
 import { DataGrid, GridSelectionModel } from "@mui/x-data-grid";
 import {
   CircularProgress,

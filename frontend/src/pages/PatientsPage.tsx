@@ -30,7 +30,7 @@ export function PatientsPage() {
   };
 
   return (
-    <div className="m-2 w-full">
+    <div className="">
       <h1>Patients</h1>
       <div className="flex space-x-4">
         <Link to="./new">
@@ -42,23 +42,22 @@ export function PatientsPage() {
           </Button>
         </Link>
       </div>
-      <div className="h-4/5">
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <DataGrid
-            rows={data?.patients!}
-            columns={patientColumns}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
-            checkboxSelection
-            onSelectionModelChange={(newSelectionModel) => {
-              setSelectionModel(newSelectionModel);
-            }}
-            selectionModel={selectionModel}
-          />
-        )}
-      </div>
+
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <DataGrid
+          rows={data?.patients!}
+          columns={patientColumns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          checkboxSelection
+          onSelectionModelChange={(newSelectionModel) => {
+            setSelectionModel(newSelectionModel);
+          }}
+          selectionModel={selectionModel}
+        />
+      )}
     </div>
   );
 }
