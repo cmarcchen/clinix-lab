@@ -1,4 +1,7 @@
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+
+const saltRounds = 10;
 
 const queries = {
   me: async (_, __, { dataSources, user }) => {
@@ -31,7 +34,8 @@ const queries = {
       };
     }
 
-    if (password !== user.password) {
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
       return {
         code: 401,
         success: false,
@@ -56,7 +60,12 @@ const queries = {
 
 const mutations = {
   register: async (_, { data }, { dataSources }) => {
-    const user = await dataSources.prisma.user.create({ data });
+    const { password } = data;
+    const hash = await bcrypt.hash(password, saltRounds);
+    const user = await dataSources.prisma.user.create({
+      data: { ...data, password: hash },
+    });
+    console.log(user);
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
       process.env.JWT_KEY
