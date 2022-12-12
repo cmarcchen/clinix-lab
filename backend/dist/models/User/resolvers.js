@@ -5,13 +5,46 @@ const queries = {
             return null;
         }
         const { id } = user;
-        return await dataSources.prisma.user.findUnique({
+        const { _id, email, role } = await dataSources.prisma.user.findUnique({
             where: { id },
         });
+        return {
+            id: _id,
+            email,
+            role,
+        };
+    },
+    signIn: async (_, { data }, { dataSources }) => {
+        const { email, password } = data;
+        const user = await dataSources.prisma.user.findUnique({
+            where: { email },
+        });
+        if (!user) {
+            return {
+                code: 401,
+                success: false,
+                message: "Invalid Credentials",
+            };
+        }
+        if (password !== user.password) {
+            return {
+                code: 401,
+                success: false,
+                message: "Invalid Credentials",
+            };
+        }
+        const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_KEY); //
+        return {
+            code: 200,
+            success: true,
+            message: "Sign In",
+            user,
+            token,
+        };
     },
 };
 const mutations = {
-    createUser: async (_, { data }, { dataSources }) => {
+    register: async (_, { data }, { dataSources }) => {
         const user = await dataSources.prisma.user.create({ data });
         const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_KEY); // Todo
         return {

@@ -16,11 +16,24 @@ export const types = `#graphql
     role: String
   }
 
-  type CreateUserResponse {
+  type TokenResponse {
     code: Int!
     success: Boolean!
     message: String!
     user: User
     token: String
+  }
+
+  type UserResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    user: User
+  }
+
+  type MeResponse {
+    id: ID
+    email: String
+    role: String
   }
 `;

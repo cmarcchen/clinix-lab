@@ -16,7 +16,7 @@ export const types = `#graphql
     role: String
   }
 
-  type CreateUserResponse {
+  type TokenResponse {
     code: Int!
     success: Boolean!
     message: String!

@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id        String  @id @default(cuid())
-  email     String
+  email     String  @unique
   password  String
   firstName String?
   lastName  String?
@@ -25,7 +25,7 @@ model Patient {
   lastName  String?
   createdAt DateTime       @default(now())
   sex       String?
-  email     String?
+  email     String?        @unique
   age       Int?
   trials    Trial[]
   events    PatientEvent[]
