@@ -14,6 +14,13 @@ export type Scalars = {
   DateTime: any;
 };
 
+export type MeResponse = {
+  __typename?: 'MeResponse';
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  role?: Maybe<Scalars['String']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   assignPatientToTrial: PatientTrialResponse;
@@ -23,10 +30,13 @@ export type Mutation = {
   deletePatient: PatientResponse;
   deletePatientEvent: PatientEventResponse;
   deleteTrial: TrialResponse;
+  deleteUser: UserResponse;
+  register: TokenResponse;
   unassignPatientToTrial: PatientTrialResponse;
   updatePatient: PatientResponse;
   updatePatientEvent: PatientEventResponse;
   updateTrial: TrialResponse;
+  updateUser: UserResponse;
 };
 
 
@@ -67,6 +77,11 @@ export type MutationDeleteTrialArgs = {
 };
 
 
+export type MutationRegisterArgs = {
+  data?: InputMaybe<UserInput>;
+};
+
+
 export type MutationUnassignPatientToTrialArgs = {
   patientId: Scalars['ID'];
   trialId: Scalars['ID'];
@@ -88,6 +103,11 @@ export type MutationUpdatePatientEventArgs = {
 export type MutationUpdateTrialArgs = {
   data?: InputMaybe<TrialInput>;
   id: Scalars['ID'];
+};
+
+
+export type MutationUpdateUserArgs = {
+  data?: InputMaybe<UserInput>;
 };
 
 export type Patient = {
@@ -157,12 +177,19 @@ export type PatientTrialResponse = {
 
 export type Query = {
   __typename?: 'Query';
+  login: TokenResponse;
+  me?: Maybe<MeResponse>;
   patient: Patient;
   patientEvent: PatientEvent;
   patientEvents: Array<Maybe<PatientEvent>>;
   patients: Array<Maybe<Patient>>;
   trial: Trial;
   trials: Array<Maybe<Trial>>;
+};
+
+
+export type QueryLoginArgs = {
+  data?: InputMaybe<UserInput>;
 };
 
 
@@ -178,6 +205,15 @@ export type QueryPatientEventArgs = {
 
 export type QueryTrialArgs = {
   id: Scalars['ID'];
+};
+
+export type TokenResponse = {
+  __typename?: 'TokenResponse';
+  code: Scalars['Int'];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+  token?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
 };
 
 export type Trial = {
@@ -204,6 +240,32 @@ export type TrialResponse = {
   message: Scalars['String'];
   success: Scalars['Boolean'];
   trial?: Maybe<Trial>;
+};
+
+export type User = {
+  __typename?: 'User';
+  email?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  lastName?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
+};
+
+export type UserInput = {
+  email: Scalars['String'];
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  password: Scalars['String'];
+  role?: InputMaybe<Scalars['String']>;
+};
+
+export type UserResponse = {
+  __typename?: 'UserResponse';
+  code: Scalars['Int'];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+  user?: Maybe<User>;
 };
 
 export type GetPatientsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -244,6 +306,13 @@ export type CreateTrialMutationVariables = Exact<{
 
 export type CreateTrialMutation = { __typename?: 'Mutation', createTrial: { __typename?: 'TrialResponse', code: number, success: boolean, message: string, trial?: { __typename?: 'Trial', id: string, title?: string | null, description?: string | null, product?: string | null, formulation?: string | null, createdAt: any } | null } };
 
+export type RegisterMutationVariables = Exact<{
+  data?: InputMaybe<UserInput>;
+}>;
+
+
+export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'TokenResponse', code: number, success: boolean, message: string, token?: string | null, user?: { __typename?: 'User', id?: string | null, email?: string | null, password?: string | null, firstName?: string | null, lastName?: string | null, role?: string | null } | null } };
+
 
 export const GetPatientsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPatients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"patients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"age"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<GetPatientsQuery, GetPatientsQueryVariables>;
 export const GetPatientDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPatient"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"patientId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"patient"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"patientId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"age"}}]}}]}}]} as unknown as DocumentNode<GetPatientQuery, GetPatientQueryVariables>;
@@ -251,3 +320,4 @@ export const CreatePatientDocument = {"kind":"Document","definitions":[{"kind":"
 export const GetTrialsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getTrials"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trials"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"product"}},{"kind":"Field","name":{"kind":"Name","value":"formulation"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"patients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"age"}}]}}]}}]}}]} as unknown as DocumentNode<GetTrialsQuery, GetTrialsQueryVariables>;
 export const GetTrialDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getTrial"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"trialId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trial"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"trialId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"product"}},{"kind":"Field","name":{"kind":"Name","value":"formulation"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"patients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"age"}}]}}]}}]}}]} as unknown as DocumentNode<GetTrialQuery, GetTrialQueryVariables>;
 export const CreateTrialDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateTrial"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"TrialInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createTrial"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"trial"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"product"}},{"kind":"Field","name":{"kind":"Name","value":"formulation"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]}}]} as unknown as DocumentNode<CreateTrialMutation, CreateTrialMutationVariables>;
+export const RegisterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UserInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"register"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"password"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"role"}}]}},{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;

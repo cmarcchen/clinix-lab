@@ -23,4 +23,17 @@ export const types = `#graphql
     user: User
     token: String
   }
+
+  type UserResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    user: User
+  }
+
+  type MeResponse {
+    id: ID
+    email: String
+    role: String
+  }
 `;

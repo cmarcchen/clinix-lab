@@ -11,6 +11,7 @@ import { NewEventPage } from "../pages/NewEventPage";
 import { MainLayout } from "../layouts/MainLayout";
 import { DashboardPage } from "../pages/DashboardPage";
 import { Login } from "../pages/authentication/Login";
+import Register from "../pages/authentication/Register";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
       },
       {
         path: "test",

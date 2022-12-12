@@ -1,7 +1,10 @@
 import { Button, Checkbox, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 
 export function Login() {
+  const { loading, error, data } = useQuery();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("hello");
