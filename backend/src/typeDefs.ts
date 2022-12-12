@@ -1,6 +1,7 @@
 import { Patient } from "./models/Patient/index.js";
 import { Trial } from "./models/Trial/index.js";
 import { PatientEvent } from "./models/PatientEvent/index.js";
+import { User } from "./models/User/index.js";
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -10,6 +11,7 @@ export const typeDefs = `#graphql
 # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
   scalar DateTime
 
+  ${User.types}
   ${Patient.types}
   ${Trial.types}
   ${PatientEvent.types}
@@ -19,12 +21,14 @@ export const typeDefs = `#graphql
   # case, the "books" query returns an array of zero or more Books (defined above).
 
   type Query {
+    ${User.queries}
     ${Patient.queries}
     ${Trial.queries}
     ${PatientEvent.queries}
   }
   
   type Mutation {
+    ${User.mutations}
     ${Patient.mutations}
     ${Trial.mutations}
     ${PatientEvent.mutations}
