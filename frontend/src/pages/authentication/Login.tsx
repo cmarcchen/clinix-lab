@@ -1,13 +1,19 @@
-import { CheckBox } from "@mui/icons-material";
 import { Button, Checkbox, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export function Login() {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    alert("hello");
+  };
   return (
-    <div className="flex p-8 gap-4 items-center flex-col bg-white w-96 rounded-xl border-slate-100 border">
+    <form
+      onSubmit={handleSubmit}
+      className="flex p-8 gap-4 items-center flex-col bg-white w-96 rounded-xl border-slate-100 border"
+    >
       <h1 className="">Hi, Welcome Back</h1>
       <p className="text-slate-300">Enter your credentials to continue</p>
-      <hr />
+
       <TextField
         required
         label="Email"
@@ -28,6 +34,7 @@ export function Login() {
         <Link to="/test">Forgot Password?</Link>
       </div>
       <Button
+        type="submit"
         sx={{
           width: "100%",
         }}
@@ -37,7 +44,7 @@ export function Login() {
       </Button>
 
       <Link to="/test">Dont have an account?</Link>
-    </div>
+    </form>
   );
 }
 

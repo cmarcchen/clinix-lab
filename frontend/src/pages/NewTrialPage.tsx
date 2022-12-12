@@ -1,15 +1,22 @@
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, CircularProgress, Stack, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useMutation } from "@apollo/client";
-import { CreateTrialDocument, Trial, TrialInput } from "../graphql/generated";
+import { CreateTrialDocument, TrialInput } from "../graphql/generated";
 
 export function NewTrialPage() {
   const navigate = useNavigate();
 
-  const [createTrial, { loading, error, data }] =
-    useMutation(CreateTrialDocument);
+  const [createTrial, { loading, error, data }] = useMutation(
+    CreateTrialDocument,
+    {
+      onCompleted: () => {
+        navigate("./..");
+        navigate(0);
+      },
+    }
+  );
 
   const [trial, setTrial] = useState<TrialInput>({});
 
@@ -21,10 +28,6 @@ export function NewTrialPage() {
         data: trial,
       },
     });
-
-    if (!loading) {
-      navigate("./..");
-    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +37,7 @@ export function NewTrialPage() {
   return (
     <div>
       <h1>New Trial</h1>
+      {loading ? <CircularProgress /> : <></>}
       <form onSubmit={handleSubmit}>
         <Stack spacing={3} sx={{ minWidth: 300 }}>
           <TextField

@@ -2,7 +2,6 @@ import { Button, Stack, TextField, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
-import { Sex } from "../data/patients";
 import { useMutation } from "@apollo/client";
 import { CreatePatientDocument } from "../graphql/generated";
 import { PatientInput } from "../graphql/generated";
@@ -14,11 +13,7 @@ export function NewPatientPage() {
     CreatePatientDocument
   );
 
-  const [patient, setPatient] = useState<PatientInput>({
-    firstName: "",
-    lastName: "",
-    sex: Sex.Default,
-  });
+  const [patient, setPatient] = useState<PatientInput>({});
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,8 +64,8 @@ export function NewPatientPage() {
             value={patient.sex}
             onChange={handleChange}
           >
-            <MenuItem value={Sex.Female}>{Sex.Female}</MenuItem>
-            <MenuItem value={Sex.Male}>{Sex.Male}</MenuItem>
+            <MenuItem value="Female">Female</MenuItem>
+            <MenuItem value="Male">Male</MenuItem>
           </TextField>
 
           <Button type="submit" variant="contained">

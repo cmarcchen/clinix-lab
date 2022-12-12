@@ -3,6 +3,7 @@ import { Button, CircularProgress, Typography } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { GetTrialsDocument } from "../graphql/generated";
 import { TrialCard } from "../components/TrialCard";
+import Alert from "@mui/material/Alert";
 
 export function TrialsPage() {
   const { loading, error, data } = useQuery(GetTrialsDocument);
@@ -22,13 +23,15 @@ export function TrialsPage() {
         </Link>
       </div>
 
+      {error ? <Alert severity="error">{error.message}</Alert> : <></>}
+      {loading ? <CircularProgress /> : <></>}
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          data?.trials.map((trial) => {
+        {data ? (
+          data.trials.map((trial) => {
             return <TrialCard key={trial!.id} {...trial!} />;
           })
+        ) : (
+          <></>
         )}
       </div>
     </div>
