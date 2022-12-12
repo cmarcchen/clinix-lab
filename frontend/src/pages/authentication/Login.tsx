@@ -1,13 +1,46 @@
-import { Button, Checkbox, TextField } from "@mui/material";
+import { Alert, Button, Checkbox, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
+import { LoginDocument } from "../../graphql/generated";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export function Login() {
-  const { loading, error, data } = useQuery();
+  const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+  const [isInvalidCredential, setIsInvalidCredential] = useState(false);
+
+  const [login, { loading, error, data }] = useLazyQuery(LoginDocument, {
+    onCompleted: (data) => {
+      const { token } = data.login;
+      if (!token) {
+        return setIsInvalidCredential(true);
+      }
+
+      setIsInvalidCredential(false);
+      localStorage.setItem("token", token!);
+      navigate("/");
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("hello");
+    login({
+      variables: {
+        email: credentials.email,
+        password: credentials.password,
+      },
+    });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
     <form
@@ -19,18 +52,22 @@ export function Login() {
 
       <TextField
         required
+        name="email"
         label="Email"
         sx={{
           width: "100%",
         }}
+        onChange={handleChange}
       />
       <TextField
         required
+        name="password"
         label="Password"
         sx={{
           width: "100%",
         }}
         type="password"
+        onChange={handleChange}
       />
       <div className="flex items-center justify-between">
         <Checkbox title="Test" />
@@ -47,6 +84,11 @@ export function Login() {
       </Button>
 
       <Link to="/test">Dont have an account?</Link>
+      {error || isInvalidCredential ? (
+        <Alert severity="error">Something is wrong</Alert>
+      ) : (
+        <></>
+      )}
     </form>
   );
 }

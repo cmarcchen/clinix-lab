@@ -5,6 +5,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import LoginIcon from "@mui/icons-material/Login";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { Logout } from "@mui/icons-material";
 
 interface MenuItem {
   item: string;
@@ -47,5 +48,10 @@ export const menuItems: MenuItem[] = [
     item: "Settings",
     to: "/setting",
     icon: <SettingsIcon />,
+  },
+  {
+    item: "Logout",
+    to: "/logout",
+    icon: <Logout />,
   },
 ];

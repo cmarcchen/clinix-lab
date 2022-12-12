@@ -18,9 +18,7 @@ const queries = {
     };
   },
 
-  login: async (_, { data }, { dataSources }) => {
-    const { email, password } = data;
-
+  login: async (_, { email, password }, { dataSources }) => {
     const user = await dataSources.prisma.user.findUnique({
       where: { email },
     });

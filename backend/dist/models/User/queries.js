@@ -1,4 +1,4 @@
 export const queries = `#graphql
   me: MeResponse
-  login(data: UserInput): TokenResponse!
+  login(email: String, password: String): TokenResponse!
 `;
