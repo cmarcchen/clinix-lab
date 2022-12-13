@@ -4,6 +4,8 @@ import { useLazyQuery } from "@apollo/client";
 import { LoginDocument } from "../../graphql/generated";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { login } from "../../context/Auth/actions";
+import { useAuthDispatch } from "../../context/Auth";
 
 export function Login() {
   const navigate = useNavigate();
@@ -12,8 +14,9 @@ export function Login() {
     password: "",
   });
   const [isInvalidCredential, setIsInvalidCredential] = useState(false);
+  const dispatch = useAuthDispatch();
 
-  const [login, { loading, error, data }] = useLazyQuery(LoginDocument, {
+  const [loginQuery, { loading, error, data }] = useLazyQuery(LoginDocument, {
     onCompleted: (data) => {
       const { token } = data.login;
       if (!token) {
@@ -22,6 +25,7 @@ export function Login() {
 
       setIsInvalidCredential(false);
       localStorage.setItem("token", token!);
+      login(dispatch, token, "test@test.com", "Manager");
       navigate("/");
     },
     onError: (error) => {
@@ -31,7 +35,7 @@ export function Login() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login({
+    loginQuery({
       variables: {
         email: credentials.email,
         password: credentials.password,

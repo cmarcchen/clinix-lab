@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button, CircularProgress, Typography } from "@mui/material";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { GetTrialsDocument } from "../graphql/generated";
 import { TrialCard } from "../components/TrialCard";
 import Alert from "@mui/material/Alert";
+import { useEffect } from "react";
 
 export function TrialsPage() {
   const { loading, error, data } = useQuery(GetTrialsDocument);

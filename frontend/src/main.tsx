@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./routes";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import App from "./App";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000",
@@ -14,7 +13,7 @@ const client = new ApolloClient({
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <RouterProvider router={router} />
+      <App />
     </ApolloProvider>
   </React.StrictMode>
 );
