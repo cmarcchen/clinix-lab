@@ -1,5 +1,5 @@
-import { queries } from "./queries.js";
-import { mutations } from "./mutations.js";
-import { resolvers } from "./resolvers.js";
-import { types } from "./types.js";
+import { queries } from "./queries";
+import { mutations } from "./mutations";
+import { resolvers } from "./resolvers";
+import { types } from "./types";
 export const Patient = { queries, mutations, resolvers, types };

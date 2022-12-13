@@ -1,7 +1,7 @@
-import { Patient } from "./models/Patient/index.js";
-import { Trial } from "./models/Trial/index.js";
-import { PatientEvent } from "./models/PatientEvent/index.js";
-import { User } from "./models/User/index.js";
+import { Patient } from "./models/Patient/index";
+import { Trial } from "./models/Trial/index";
+import { PatientEvent } from "./models/PatientEvent/index";
+import { User } from "./models/User/index";
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.

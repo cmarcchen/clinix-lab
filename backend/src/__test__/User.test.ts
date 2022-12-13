@@ -11,7 +11,7 @@ describe("User", () => {
     expect(true).toBe(true);
   });
 
-  it("Should register a new user", async () => {
+  it("Should login an existing user", async () => {
     const prisma = new PrismaClient({});
 
     interface ContextValue {
@@ -47,6 +47,6 @@ describe("User", () => {
     );
     assert(response.body.kind === "single");
     expect(response.body.singleResult.errors).toBeUndefined();
-    expect(response.body.singleResult.data?.token).toBeDefined();
+    expect(response.body.singleResult.data?.login).toBeDefined();
   });
 });

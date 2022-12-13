@@ -1,8 +1,8 @@
-import { Patient } from "./models/Patient/index.js";
+import { Patient } from "./models/Patient/index";
 import { DateTimeResolver } from "graphql-scalars";
-import { Trial } from "./models/Trial/index.js";
-import { PatientEvent } from "./models/PatientEvent/index.js";
-import { User } from "./models/User/index.js";
+import { Trial } from "./models/Trial/index";
+import { PatientEvent } from "./models/PatientEvent/index";
+import { User } from "./models/User/index";
 // Resolvers define how to fetch the types defined in your schema.
 // This resolver retrieves books from the "books" array above.
 export const resolvers = {
