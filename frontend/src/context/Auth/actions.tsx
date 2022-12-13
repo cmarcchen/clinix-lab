@@ -1,23 +1,23 @@
 import React from "react";
 import { AuthReducerAction } from "./reducer";
 
+interface LoginPayload {
+  token: string;
+  user: {
+    email: string;
+    role: string;
+  };
+}
+
 export async function login(
   dispatch: React.Dispatch<AuthReducerAction>,
-  token: string,
-  email: string,
-  role: string
+  payload: LoginPayload
 ) {
   dispatch({
     type: "LOGIN",
-    payload: {
-      token,
-      user: {
-        email,
-        role,
-      },
-    },
+    payload,
   });
-  localStorage.setItem("token", token);
+  localStorage.setItem("token", payload.token);
 }
 
 export async function logout(dispatch: React.Dispatch<AuthReducerAction>) {

@@ -1,5 +1,8 @@
+import { useAuthState } from "../context/Auth";
+
 export function DashboardPage() {
-  return <h1>Dashboard</h1>;
+  const user = useAuthState();
+  return <h1>{user.token}</h1>;
 }
 
 export default DashboardPage;

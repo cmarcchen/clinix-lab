@@ -3,9 +3,12 @@ import { Alert, Button, Checkbox, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { RegisterDocument } from "../../graphql/generated";
+import { useAuthDispatch } from "../../context/Auth";
+import { login } from "../../context/Auth/actions";
 
 export function Register() {
   const navigate = useNavigate();
+  const dispatch = useAuthDispatch();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -19,8 +22,15 @@ export function Register() {
       },
     },
     onCompleted: (data) => {
-      const { token } = data.register;
-      localStorage.setItem("token", token!);
+      const { token, user } = data.register;
+
+      login(dispatch, {
+        token: token!,
+        user: {
+          email: user?.email!,
+          role: user?.role!,
+        },
+      });
       navigate("/");
     },
   });

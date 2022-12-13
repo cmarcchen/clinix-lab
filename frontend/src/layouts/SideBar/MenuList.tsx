@@ -11,16 +11,20 @@ import { Link } from "react-router-dom";
 export function MenuList() {
   return (
     <List>
-      {menuItems.map(({ item, to, icon }, index) => (
-        <Link key={index} to={to}>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-      ))}
+      {menuItems.map(({ item, to, icon, hidden }, index) =>
+        hidden ? (
+          <></>
+        ) : (
+          <Link key={index} to={to}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>{icon}</ListItemIcon>
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        )
+      )}
     </List>
   );
 }

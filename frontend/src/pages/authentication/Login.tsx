@@ -18,14 +18,19 @@ export function Login() {
 
   const [loginQuery, { loading, error, data }] = useLazyQuery(LoginDocument, {
     onCompleted: (data) => {
-      const { token } = data.login;
+      const { token, user } = data.login;
+
       if (!token) {
         return setIsInvalidCredential(true);
       }
-
       setIsInvalidCredential(false);
-      localStorage.setItem("token", token!);
-      login(dispatch, token, "test@test.com", "Manager");
+      login(dispatch, {
+        token,
+        user: {
+          email: user?.email!,
+          role: user?.role!,
+        },
+      });
       navigate("/");
     },
     onError: (error) => {
