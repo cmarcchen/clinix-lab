@@ -1,6 +1,6 @@
 import { Button, CircularProgress, Stack, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { useMutation } from "@apollo/client";
 import { CreateTrialDocument, TrialInput } from "../graphql/generated";

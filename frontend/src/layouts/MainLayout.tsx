@@ -10,7 +10,7 @@ export function MainLayout() {
       <SideBar />
       <Box component="main" sx={{ marginLeft: "240px", flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <div className="flex justify-center">
+        <div className="flex justify-center p-8">
           <Outlet />
         </div>
       </Box>

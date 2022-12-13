@@ -25,8 +25,8 @@ export function NewPatientPage() {
     });
 
     if (!loading) {
-      console.log(data);
       navigate("./..");
+      navigate(0);
     }
   };
 
