@@ -1,9 +1,16 @@
+import { Button } from "@mui/material";
+import { useSnackbar } from "notistack";
 import { useContext } from "react";
 import { AppCtx } from "../context/Name";
 
 function TestPage() {
   const data = useContext(AppCtx);
-  return <h1>{data?.name}</h1>;
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const handleClick = () => {
+    enqueueSnackbar("I love hooks", { variant: "success" });
+  };
+
+  return <Button onClick={handleClick}>Show snackbar</Button>;
 }
 
 export default TestPage;

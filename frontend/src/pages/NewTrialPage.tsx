@@ -4,16 +4,19 @@ import React, { useState } from "react";
 
 import { useMutation } from "@apollo/client";
 import { CreateTrialDocument, TrialInput } from "../graphql/generated";
+import { useSnackbar } from "notistack";
 
 export function NewTrialPage() {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [createTrial, { loading, error, data }] = useMutation(
     CreateTrialDocument,
     {
       onCompleted: () => {
+        enqueueSnackbar("Created Trial", { variant: "success" });
+
         navigate("./..");
-        navigate(0);
       },
     }
   );
