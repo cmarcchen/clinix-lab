@@ -3,8 +3,14 @@ query GetPatients {
     id
     firstName
     lastName
-    age
+    createdAt
+    gender
     email
+    age
+    dateOfBirth
+    jobTitle
+    address
+    pictureUrl
   }
 }
 
@@ -14,13 +20,35 @@ query GetPatient($patientId: ID!) {
     firstName
     lastName
     createdAt
+    gender
     email
     age
+    dateOfBirth
+    jobTitle
+    address
+    pictureUrl
+    trials {
+      id
+    }
+    events {
+      id
+    }
   }
 }
 
 mutation CreatePatient($data: PatientInput) {
   createPatient(data: $data) {
+    code
+    success
+    message
+    patient {
+      id
+    }
+  }
+}
+
+mutation UpdatePatient($updatePatientId: ID!, $data: PatientInput) {
+  updatePatient(id: $updatePatientId, data: $data) {
     code
     success
     message

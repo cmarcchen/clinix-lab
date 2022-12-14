@@ -5,32 +5,40 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { GetPatientQuery } from "../../graphql/generated";
+import { PatientModal } from "./PatientModal";
 
-import type { Patient } from "../../types";
-
-export const PatientCard: React.FC<Patient> = ({
-  id,
+export const PatientCard: React.FC<GetPatientQuery["patient"]> = ({
   firstName,
   lastName,
-  sex,
+  jobTitle,
+  email,
+  gender,
 }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Trial
+          {jobTitle}
         </Typography>
         <Typography variant="h5" component="div">
-          {firstName}
+          {`${firstName} ${lastName}`}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {id}
+          {email}
         </Typography>
-        <Typography variant="body2">{lastName}</Typography>
+        <Typography variant="body2">{gender}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Edit Patient</Button>
+        <Button size="small" onClick={handleOpen}>
+          Edit Patient
+        </Button>
       </CardActions>
+      <PatientModal open={open} handleClose={handleClose} />
     </Card>
   );
 };

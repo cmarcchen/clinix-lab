@@ -24,7 +24,11 @@ const patientColumns: GridColDef[] = [
   { field: "firstName", headerName: "First Name" },
   { field: "lastName", headerName: "Last Name" },
   { field: "gender", headerName: "Gender" },
-  { field: "dateOfBirth", headerName: "Date Of Birth" },
+  {
+    field: "dateOfBirth",
+    headerName: "Date Of Birth",
+    width: 120,
+  },
   { field: "email", headerName: "Email", width: 240 },
   { field: "jobTitle", headerName: "Job Title", width: 200 },
   { field: "address", headerName: "Address", width: 320 },
