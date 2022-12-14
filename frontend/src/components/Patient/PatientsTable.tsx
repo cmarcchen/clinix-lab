@@ -4,7 +4,6 @@ import {
   DataGridProps,
   GridColDef,
   GridRenderCellParams,
-  GridSelectionModel,
 } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { GetPatientsQuery } from "../../graphql/generated";
@@ -24,7 +23,11 @@ const patientColumns: GridColDef[] = [
   },
   { field: "firstName", headerName: "First Name" },
   { field: "lastName", headerName: "Last Name" },
-  { field: "sex", headerName: "Sex" },
+  { field: "gender", headerName: "Gender" },
+  { field: "dateOfBirth", headerName: "Date Of Birth" },
+  { field: "email", headerName: "Email", width: 240 },
+  { field: "jobTitle", headerName: "Job Title", width: 200 },
+  { field: "address", headerName: "Address", width: 320 },
 ];
 
 interface PatientsTableProps {

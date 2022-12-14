@@ -4,9 +4,13 @@ export const types = `#graphql
     firstName: String
     lastName: String
     createdAt: DateTime!
-    sex: String
+    gender: String
     email: String
     age: Int
+    dateOfBirth: DateTime
+    jobTitle: String
+    address: String
+    pictureUrl: String
     trials: [Trial]
     events: [PatientEvent]
   }
@@ -14,9 +18,13 @@ export const types = `#graphql
   input PatientInput {
     firstName: String
     lastName: String
-    sex: String
+    gender: String
     email: String
     age: Int
+    dateOfBirth: DateTime
+    jobTitle: String
+    address: String
+    pictureUrl: String
   }
 
   type PatientResponse {
