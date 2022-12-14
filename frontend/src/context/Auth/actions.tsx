@@ -18,6 +18,7 @@ export async function login(
     payload,
   });
   localStorage.setItem("token", payload.token);
+  localStorage.setItem("email", payload.user.email);
 }
 
 export async function logout(dispatch: React.Dispatch<AuthReducerAction>) {
@@ -25,4 +26,5 @@ export async function logout(dispatch: React.Dispatch<AuthReducerAction>) {
 
   // localStorage.removeItem("currentUser");
   localStorage.removeItem("token");
+  localStorage.removeItem("email");
 }

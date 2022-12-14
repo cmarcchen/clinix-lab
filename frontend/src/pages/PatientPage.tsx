@@ -25,14 +25,15 @@ export function PatientPage() {
   };
 
   return (
-    <div className="bg-">
-      {loading ? <CircularProgress /> : <PatientCard {...data!.patient} />}
-      <div className="">
-        <Button variant="contained" onClick={handleAddEventClick}>
-          Add Event
-        </Button>
-        <EventTimeline events={data?.patient.events} />
-      </div>
+    <div className="flex flex-col gap-4">
+      {loading ? <CircularProgress /> : <></>}
+      {data ? <PatientCard {...data.patient} /> : <></>}
+
+      <Button variant="contained" onClick={handleAddEventClick}>
+        Add Event
+      </Button>
+
+      {data ? <EventTimeline events={data.patient.events} /> : <></>}
     </div>
   );
 }

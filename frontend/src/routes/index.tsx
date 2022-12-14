@@ -13,11 +13,14 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { Login } from "../pages/authentication/Login";
 import Register from "../pages/authentication/Register";
 import Logout from "../pages/authentication/Logout";
+import { Settings } from "../pages/Settings";
+import { ErrorPage } from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "dashboard",
@@ -34,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "logout",
         element: <Logout />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
       },
       {
         path: "test",

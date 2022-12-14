@@ -4,6 +4,10 @@ const token = localStorage.getItem("token")
   ? localStorage.getItem("token")
   : "";
 
+const email = localStorage.getItem("email")
+  ? localStorage.getItem("email")
+  : "";
+
 interface LogoutAction {
   type: "LOGOUT";
   payload?: {};

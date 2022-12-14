@@ -60,8 +60,8 @@ export const menuItems: MenuItem[] = [
   },
   {
     item: "Settings",
-    name: "setting",
-    to: "/setting",
+    name: "settings",
+    to: "/settings",
     hidden: false,
     icon: <SettingsIcon />,
   },
