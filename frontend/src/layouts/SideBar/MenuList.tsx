@@ -11,7 +11,7 @@ import { Link, matchPath, useLocation } from "react-router-dom";
 export function MenuList() {
   const { pathname } = useLocation();
 
-  const path = "/:route";
+  const path = "/:route/*";
   const match = matchPath(path, pathname);
 
   const route = match?.params.route;
