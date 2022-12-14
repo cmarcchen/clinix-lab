@@ -18,8 +18,18 @@ const queries = {
     },
 };
 const mutations = {
-    createTrial: async (_, { data }, { dataSources }) => {
-        const trial = await dataSources.prisma.trial.create({ data });
+    createTrial: async (_, { data, patientsId }, { dataSources }) => {
+        const trial = await dataSources.prisma.trial.create({
+            include: { patients: true },
+            data: {
+                ...data,
+                patients: {
+                    connect: patientsId.map((id) => {
+                        return { id };
+                    }),
+                },
+            },
+        });
         return {
             code: 200,
             success: true,

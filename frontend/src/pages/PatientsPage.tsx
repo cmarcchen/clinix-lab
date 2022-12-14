@@ -1,29 +1,11 @@
+import { PatientsTable } from "./../components/PatientsTable";
+import { CircularProgress } from "@mui/material";
 import Button from "@mui/material/Button";
-import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+
 import { Link } from "react-router-dom";
-import { useState, useEffect, ReactNode } from "react";
 
 import { useQuery } from "@apollo/client";
 import { GetPatientsDocument } from "../graphql/generated";
-import { CircularProgress } from "@mui/material";
-
-const patientColumns: GridColDef[] = [
-  {
-    field: "id",
-    headerName: "ID",
-    renderCell: (params: GridRenderCellParams<String>): ReactNode => (
-      <Link
-        to={`./${params.value}`}
-        className="text-blue-600 underline hover:text-blue-800"
-      >
-        {params.value?.substring(0, 10)}
-      </Link>
-    ),
-  },
-  { field: "firstName", headerName: "First Name" },
-  { field: "lastName", headerName: "Last Name" },
-  { field: "sex", headerName: "Sex" },
-];
 
 export function PatientsPage() {
   const { loading, error, data } = useQuery(GetPatientsDocument);
@@ -39,16 +21,7 @@ export function PatientsPage() {
 
       {loading ? <CircularProgress /> : <></>}
 
-      {data ? (
-        <DataGrid
-          rows={data?.patients!}
-          columns={patientColumns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-        />
-      ) : (
-        <></>
-      )}
+      {data ? <PatientsTable data={data} /> : <></>}
     </div>
   );
 }

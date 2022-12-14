@@ -1,5 +1,5 @@
-import { Patient } from "./models/Patient/index.js";
 import { DateTimeResolver } from "graphql-scalars";
+import { Patient } from "./models/Patient/index.js";
 import { Trial } from "./models/Trial/index.js";
 import { PatientEvent } from "./models/PatientEvent/index.js";
 import { User } from "./models/User/index.js";
