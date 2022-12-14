@@ -29,9 +29,19 @@ query GetPatient($patientId: ID!) {
     pictureUrl
     trials {
       id
+      title
+      description
+      product
+      formulation
+      createdAt
     }
     events {
       id
+      title
+      description
+      type
+      createdBy
+      createdAt
     }
   }
 }

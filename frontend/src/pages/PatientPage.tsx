@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { Button, CircularProgress } from "@mui/material";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
-import { EventTimeline } from "../components/EventTimeline";
+import { EventTimeline } from "../components/Patient/EventTimeline";
 import { PatientCard } from "../components/Patient/PatientCard";
 import { GetPatientDocument } from "../graphql/generated";
 
@@ -31,7 +31,7 @@ export function PatientPage() {
         <Button variant="contained" onClick={handleAddEventClick}>
           Add Event
         </Button>
-        {/* <EventTimeline events={patientEvents} /> */}
+        <EventTimeline events={data?.patient.events} />
       </div>
     </div>
   );
