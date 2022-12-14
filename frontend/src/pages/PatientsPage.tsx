@@ -1,6 +1,6 @@
-import { PatientsTable } from "./../components/PatientsTable";
-import { CircularProgress } from "@mui/material";
-import Button from "@mui/material/Button";
+import { PatientsTable } from "../components/Patient/PatientsTable";
+
+import { Alert, Typography, Button, CircularProgress } from "@mui/material";
 
 import { Link } from "react-router-dom";
 
@@ -11,16 +11,15 @@ export function PatientsPage() {
   const { loading, error, data } = useQuery(GetPatientsDocument);
 
   return (
-    <div className="min-w-full h-[36rem]">
-      <h1 className="mb-2">Patients</h1>
-      <div className="mb-4">
-        <Link to="./new">
-          <Button variant="contained">New</Button>
-        </Link>
-      </div>
+    <div className="min-w-full min-h-[36rem] flex flex-col gap-4">
+      <Typography>Patients</Typography>
+
+      <Link to="./new">
+        <Button variant="contained">New</Button>
+      </Link>
 
       {loading ? <CircularProgress /> : <></>}
-
+      {error ? <Alert severity="error">Failed to fetch</Alert> : <></>}
       {data ? <PatientsTable data={data} /> : <></>}
     </div>
   );

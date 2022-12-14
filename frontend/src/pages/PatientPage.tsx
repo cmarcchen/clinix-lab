@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { Button, CircularProgress } from "@mui/material";
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import { EventTimeline } from "../components/EventTimeline";
-import { PatientCard } from "../components/PatientCard";
+import { PatientCard } from "../components/Patient/PatientCard";
 import { GetPatientDocument } from "../graphql/generated";
 
 export function PatientPage() {

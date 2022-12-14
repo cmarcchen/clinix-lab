@@ -14,25 +14,30 @@ const steps = [
 
 interface NewTrialStepperProps {
   activeStep: number;
-  skipped: Set<number>;
   handleNext: ButtonProps["onClick"];
   handleBack: ButtonProps["onClick"];
   handleSkip: ButtonProps["onClick"];
   isStepOptional: (index: number) => boolean;
   isStepSkipped: (index: number) => boolean;
   handleReset: ButtonProps["onClick"];
+  handleFinish: any;
 }
 
 export const NewTrialStepper: React.FC<NewTrialStepperProps> = ({
   activeStep,
-  skipped,
   handleNext,
   handleBack,
   handleSkip,
   isStepOptional,
   isStepSkipped,
   handleReset,
+  handleFinish,
 }) => {
+  React.useEffect(() => {
+    if (activeStep === steps.length) {
+      handleFinish();
+    }
+  }, [activeStep]);
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>

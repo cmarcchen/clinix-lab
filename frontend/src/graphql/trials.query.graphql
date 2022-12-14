@@ -36,8 +36,9 @@ query getTrial($trialId: ID!) {
     }
   }
 }
-mutation CreateTrial($data: TrialInput) {
-  createTrial(data: $data) {
+
+mutation CreateTrial($data: TrialInput, $patientsId: [String]) {
+  createTrial(data: $data, patientsId: $patientsId) {
     code
     success
     message
@@ -48,6 +49,9 @@ mutation CreateTrial($data: TrialInput) {
       product
       formulation
       createdAt
+      patients {
+        id
+      }
     }
   }
 }

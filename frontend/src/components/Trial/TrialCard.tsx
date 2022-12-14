@@ -6,7 +6,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Trial } from "../graphql/generated";
+import { Trial } from "../../graphql/generated";
 
 export const TrialCard: React.FC<Trial> = ({
   id,

@@ -2,13 +2,13 @@ import { NewTrialForm } from "./../components/NewTrial/NewTrialForm";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-
 import { useMutation } from "@apollo/client";
 import { CreateTrialDocument, TrialInput } from "../graphql/generated";
 import { useSnackbar } from "notistack";
 import NewTrialStepper from "../components/NewTrial/NewTrialStepper";
 import NewTrialManager from "../components/NewTrial/NewTrialManager";
 import NewTrialPatients from "../components/NewTrial/NewTrialPatients";
+import { GridSelectionModel } from "@mui/x-data-grid";
 
 export function NewTrialPage() {
   const renderStep = () => {
@@ -24,7 +24,12 @@ export function NewTrialPage() {
       case 1:
         return <NewTrialManager />;
       case 2:
-        return <NewTrialPatients />;
+        return (
+          <NewTrialPatients
+            handleSelectionModelChange={handleSelectionModelChange}
+            selectionModel={selectionModel}
+          />
+        );
       default:
         break;
     }
@@ -32,6 +37,16 @@ export function NewTrialPage() {
 
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+
+  const [selectionModel, setSelectionModel] =
+    React.useState<GridSelectionModel>([]);
+
+  const handleSelectionModelChange = (
+    newSelectionModel: GridSelectionModel
+  ) => {
+    console.log(selectionModel);
+    setSelectionModel(newSelectionModel);
+  };
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
@@ -47,14 +62,22 @@ export function NewTrialPage() {
     }
   );
 
-  const [trial, setTrial] = useState<TrialInput>({});
+  const [trial, setTrial] = useState<TrialInput>({
+    title: "",
+    product: "",
+    description: "",
+    formulation: "",
+  });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+  };
 
+  const handleFinish = async () => {
     const response = await createTrial({
       variables: {
         data: trial,
+        patientsId: selectionModel as string[],
       },
     });
   };
@@ -119,7 +142,7 @@ export function NewTrialPage() {
         handleSkip={handleSkip}
         isStepOptional={isStepOptional}
         isStepSkipped={isStepSkipped}
-        skipped={skipped}
+        handleFinish={handleFinish}
       />
       {renderStep()}
     </div>

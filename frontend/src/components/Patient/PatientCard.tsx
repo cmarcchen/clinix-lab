@@ -5,8 +5,8 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Sex } from "../data/patients";
-import type { Patient } from "../types";
+
+import type { Patient } from "../../types";
 
 export const PatientCard: React.FC<Patient> = ({
   id,

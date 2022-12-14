@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button, CircularProgress, Typography } from "@mui/material";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { GetTrialsDocument } from "../graphql/generated";
-import { TrialCard } from "../components/TrialCard";
+import { TrialCard } from "../components/Trial/TrialCard";
 import Alert from "@mui/material/Alert";
 import { useEffect } from "react";
 
@@ -10,15 +10,9 @@ export function TrialsPage() {
   const { loading, error, data } = useQuery(GetTrialsDocument);
 
   return (
-    <div className="w-full">
-      <Typography
-        sx={{
-          marginBottom: "20px",
-        }}
-      >
-        Trials
-      </Typography>
-      <div className="flex space-x-3 mb-10">
+    <div className="w-full flex flex-col gap-4">
+      <Typography>Trials</Typography>
+      <div className="flex space-x-3">
         <Link to="./new">
           <Button variant="contained">New</Button>
         </Link>

@@ -7,7 +7,7 @@ import {
   GridSelectionModel,
 } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
-import { GetPatientsQuery } from "../graphql/generated";
+import { GetPatientsQuery } from "../../graphql/generated";
 
 const patientColumns: GridColDef[] = [
   {
@@ -30,15 +30,16 @@ const patientColumns: GridColDef[] = [
 interface PatientsTableProps {
   data: GetPatientsQuery;
   checkboxSelection?: DataGridProps["checkboxSelection"];
+  selectionModel?: DataGridProps["selectionModel"];
+  handleSelectionModelChange?: DataGridProps["onSelectionModelChange"];
 }
 
 export const PatientsTable: React.FC<PatientsTableProps> = ({
   data,
   checkboxSelection,
+  selectionModel,
+  handleSelectionModelChange,
 }) => {
-  const [selectionModel, setSelectionModel] =
-    React.useState<GridSelectionModel>([]);
-
   return (
     <DataGrid
       checkboxSelection={checkboxSelection}
@@ -46,10 +47,7 @@ export const PatientsTable: React.FC<PatientsTableProps> = ({
       columns={patientColumns}
       pageSize={10}
       rowsPerPageOptions={[10]}
-      onSelectionModelChange={(newSelectionModel) => {
-        setSelectionModel(newSelectionModel);
-        console.log(newSelectionModel);
-      }}
+      onSelectionModelChange={handleSelectionModelChange}
       selectionModel={selectionModel}
     />
   );
