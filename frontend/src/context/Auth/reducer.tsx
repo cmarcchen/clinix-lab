@@ -40,7 +40,7 @@ export type AuthReducerAction = LogoutAction | LoginAction | RegisterAction;
 export const initialState: AuthStateInterface = {
   token,
   user: {
-    email: "",
+    email: email ? email : "",
     role: "",
   },
 };

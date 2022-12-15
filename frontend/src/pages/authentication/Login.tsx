@@ -61,6 +61,7 @@ export function Login() {
 
       <TextField
         required
+        id="email"
         name="email"
         label="Email"
         sx={{
@@ -70,6 +71,7 @@ export function Login() {
       />
       <TextField
         required
+        id="password"
         name="password"
         label="Password"
         sx={{
