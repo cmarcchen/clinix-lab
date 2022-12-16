@@ -3,8 +3,8 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./typeDefs.js";
 import { resolvers } from "./resolvers.js";
-import { PrismaClient } from "@prisma/client";
 import { getUser } from "./models/User/utils.js";
+import { prisma } from "./connections/index.js";
 dotenv.config();
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
@@ -27,7 +27,7 @@ const { url } = await startStandaloneServer(server, {
                 // Create a new instance of our data source for every request!
                 // (We pass in the database connection because we don't need
                 // a new connection for every request.)
-                prisma: new PrismaClient(),
+                prisma,
             },
         };
     },

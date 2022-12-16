@@ -6,6 +6,7 @@ import { resolvers } from "./resolvers.js";
 
 import { PrismaClient } from "@prisma/client";
 import { getUser } from "./models/User/utils.js";
+import { prisma } from "./connections/index.js";
 
 dotenv.config();
 
@@ -38,7 +39,7 @@ const { url } = await startStandaloneServer(server, {
         // Create a new instance of our data source for every request!
         // (We pass in the database connection because we don't need
         // a new connection for every request.)
-        prisma: new PrismaClient(),
+        prisma,
       },
     };
   },
