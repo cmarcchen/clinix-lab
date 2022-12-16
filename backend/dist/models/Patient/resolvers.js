@@ -1,5 +1,16 @@
+import { GraphQLError } from "graphql";
 const queries = {
-    patients: async (_, __, { dataSources }) => {
+    patients: async (_, __, { dataSources, user, url }) => {
+        console.log(url);
+        if (!user)
+            // throwing a `GraphQLError` here allows us to specify an HTTP status code,
+            // standard `Error`s will have a 500 status code by default
+            throw new GraphQLError("User is not authenticated", {
+                extensions: {
+                    code: "UNAUTHENTICATED",
+                    http: { status: 401 },
+                },
+            });
         return await dataSources.prisma.patient.findMany({
             include: {
                 events: true,

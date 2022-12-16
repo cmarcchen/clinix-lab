@@ -7,6 +7,7 @@ import { resolvers } from "./resolvers.js";
 import { PrismaClient } from "@prisma/client";
 import { getUser } from "./models/User/utils.js";
 import { prisma } from "./connections/index.js";
+import { GraphQLError } from "graphql";
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ const { url } = await startStandaloneServer(server, {
     const token = req.headers.authorization || "";
 
     const user = await getUser(token);
+
     return {
       user,
       dataSources: {
